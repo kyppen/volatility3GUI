@@ -11,9 +11,9 @@ def clear_frame(frame):
 
 
 def windows_button(system, frame, root):
-    print("windows")
+    print("Windows")
     clear_frame(frame)
-    MainScreen.mainScreen("windows", root)
+    MainScreen.mainScreen("Windows", root)
 
 def OSX_button(system, frame, root):
     print("OSX")
