@@ -15,7 +15,7 @@ def run_volatility_command(command):
     # Run the Volatility command as a subprocess
     try:
         # Example: subprocess.check_output(['vol.py', '-f', '/path/to/file', 'windows.pslist'])
-        output = subprocess.check_output(command, shell=True, text=True)
+        output = subprocess.Popen(command, shell=True, text=True)
     except subprocess.CalledProcessError as e:
         output = e.output
     
@@ -40,16 +40,17 @@ button1 = tk.Button(frame_buttons, text="open file",
                     command=lambda: openfile.browse_files)
 button1.pack(fill=tk.X)
 
+testttt = ['python volatility3-develop\\vol.py', '-f', 'MSEDGEWIN10-20231107-184623.raw', 'windows.psscan']
 button1 = tk.Button(frame_buttons, text="Command 1",
-                    command=lambda: run_volatility_command('volatility3/vol.py -f “/path/to/file” windows.pslist'))
+                    command=lambda: run_volatility_command(testttt))
 button1.pack(fill=tk.X)
 
 button2 = tk.Button(frame_buttons, text="Command 2",
-                    command=lambda: run_volatility_command('volatility3/vol.py -f “/path/to/file” windows.psscan'))
+                    command=lambda: run_volatility_command('volatility3-develop/vol.py -f MSEDGEWIN10-20231107-184623.raw windows.psscan'))
 button2.pack(fill=tk.X)
 
 button3 = tk.Button(frame_buttons, text="Command 3",
-                    command=lambda: run_volatility_command('volatility3/vol.py -f “/path/to/file” windows.pstree'))
+                    command=lambda: run_volatility_command('../volatility3-develop/volatility3/vol.py -f “/path/to/file” windows.pstree'))
 button3.pack(fill=tk.X)
 
 # Start the GUI event loop
