@@ -2,8 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/lime/LiME" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/volatility3" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/volatility3/Windows-Symbol-Tables" vcs="Git" />
   </component>
 </project>
