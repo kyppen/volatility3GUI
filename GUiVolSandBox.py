@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog
+from tkinter import ttk, Menu, filedialog
 import subprocess
 
 
@@ -38,11 +38,16 @@ def create_gui():
 
     root = tk.Tk()
     root.title("Volatility GUI")
-    frame_buttons = tk.Frame(root)
-    frame_buttons.pack(side=tk.LEFT, padx=10, pady=10)
+    frame_buttons = ttk.Frame(root, padding="10 10 10 10", style='TFrame')
+    frame_buttons.grid(row=0, column=0, padx=10, pady=10, sticky='nsew')
 
-    output_text = tk.Text(root, bg="white")
-    output_text.pack(side=tk.RIGHT, expand=True, fill=tk.BOTH)
+    output_frame = ttk.Frame(root, padding="10 10 10 10", style='TFrame')
+    output_frame.grid(row=2, column=0, columnspan=2, padx=10, pady=10, sticky='nsew')
+    output_text = tk.Text(output_frame, wrap='word', height=15)
+    output_text.grid(row=0, column=0, sticky='nsew')
+    output_scroll = ttk.Scrollbar(output_frame, command=output_text.yview)
+    output_scroll.grid(row=0, column=1, sticky='ns')
+    output_text.config(yscrollcommand=output_scroll.set)
 
     # Initial Volatility command setup
     volatility_command = ['python', 'volatility3-develop\\vol.py', '-f', '', 'windows.pslist']
@@ -58,6 +63,19 @@ def create_gui():
     button_command = tk.Button(frame_buttons, text="Run Volatility Command",
                                command=lambda: run_volatility_command(volatility_command))
     button_command.pack(fill=tk.X)
+
+    root.grid_rowconfigure(0, weight=1)
+    root.grid_rowconfigure(1, weight=1)
+    root.grid_rowconfigure(2, weight=10)
+    root.grid_columnconfigure(0, weight=1)
+    root.grid_columnconfigure(1, weight=10)
+
+    frame_buttons.grid_rowconfigure(1, weight=1)
+    frame_buttons.grid_columnconfigure(0, weight=1)
+    frame_buttons.grid_columnconfigure(1, weight=1)
+
+    output_frame.grid_rowconfigure(0, weight=1)
+    output_frame.grid_columnconfigure(0, weight=1)
 
     root.mainloop()
 
