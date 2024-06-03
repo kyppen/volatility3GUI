@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/smidigprosjekt.iml" filepath="$PROJECT_DIR$/.idea/smidigprosjekt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/volatility3GUI.iml" filepath="$PROJECT_DIR$/.idea/volatility3GUI.iml" />
     </modules>
   </component>
 </project>

@@ -18,6 +18,12 @@ def run_volatility_command(command):
     output_text.config(state="disabled")
 
 
+def run_command(command_text):
+    cmd_history = open("logs/command-logs.txt", "a", encoding='utf-8')
+    cmd_history.write(command_text + "\n")
+    cmd_history.close()
+
+
 def browse_file():
     # Open file dialog and update the command with the selected file path
     file_path = filedialog.askopenfilename(filetypes=[("Memory dump files", "*.raw"), ("All files", "*.*")])
