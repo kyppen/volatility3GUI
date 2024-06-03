@@ -19,7 +19,7 @@ def run_volatility_command(command):
 
 
 def run_command(command_text):
-    cmd_history = open("logs/command-logs.txt", "a", encoding='utf-8')
+    cmd_history = open("logs/command-logs.txt", "a+", encoding='utf-8')
     cmd_history.write(command_text + "\n")
     cmd_history.close()
 
