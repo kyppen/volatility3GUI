@@ -49,7 +49,7 @@ class command:
         print(self.filename)
         print(self.os)
         print(self.plugin)
-        list = ["volatility3/vol.py", self.flag, self.filename, self.getOsAndPlugin()]
+        list = ["python", "volatility3/vol.py", self.flag, self.filename, self.getOsAndPlugin()]
         return list
     def getOSXCommandList(self):
         #TODO
@@ -58,7 +58,7 @@ class command:
     def to_string(self):
         if not all([self.os, self.plugin, self.flag, self.filename]):
             raise ValueError("All components (OS, command, flag, and file path) must be set")
-        return f"python3 opt/volatility3/vol.py {self.flag} {self.filename} {self.os}.{self.plugin}"
+        return f"{self.flag} {self.filename} {self.os}.{self.plugin}"
     def printString(self):
         print(self.os)
         print(self.plugin)

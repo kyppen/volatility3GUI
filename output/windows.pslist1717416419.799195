@@ -1,4 +1,4 @@
-Volatility 3 Framework 2.7.1
+-f benji.raw windows.pslistVolatility 3 Framework 2.7.1
 
 PID	PPID	ImageFileName	Offset(V)	Threads	Handles	SessionId	Wow64	CreateTime	ExitTime	File output
 
