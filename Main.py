@@ -1,7 +1,6 @@
 #import GUiVolatility
 import OsSelect
 
-
 def Start():
     ##run_volatility_command
     print("OsSelect()")
