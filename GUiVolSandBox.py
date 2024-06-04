@@ -34,12 +34,15 @@ def browse_file():
 
 # Set up the GUI
 def create_gui():
-    global path_entry, output_text, volatility_command, file_label
+    global path_entry, selected_entry, cmd_var, flag_var, os_var, output_text, volatility_command, file_label
 
     root = tk.Tk()
     root.title("Volatility GUI")
     frame_buttons = ttk.Frame(root, padding="10 10 10 10", style='TFrame')
     frame_buttons.grid(row=0, column=0, padx=10, pady=10, sticky='nsew')
+
+    left_frame = ttk.Frame(root, padding="10 10 10 10", style='TFrame')
+    left_frame.grid(row=0, column=0, padx=10, pady=10, sticky='nsew')
 
     output_frame = ttk.Frame(root, padding="10 10 10 10", style='TFrame')
     output_frame.grid(row=2, column=0, columnspan=2, padx=10, pady=10, sticky='nsew')
@@ -50,19 +53,42 @@ def create_gui():
     output_text.config(yscrollcommand=output_scroll.set)
 
     # Initial Volatility command setup
-    volatility_command = ['python', 'volatility3-develop\\vol.py', '-f', '', 'windows.pslist']
 
     # Browse file button
-    browse_button = tk.Button(frame_buttons, text="Browse File", command=browse_file)
-    browse_button.pack(fill=tk.X)
+    browse_button = ttk.Button(left_frame, text="Browse File", command=browse_file)
+    browse_button.grid(row=3, column=0, pady=5)
+    run_button = ttk.Button(left_frame, text="Run", command=lambda: run_volatility_command(create_gui()))
+    run_button.grid(row=3, column=0, pady=5)
+    file_label = ttk.Label(frame_buttons, text="No file selected")
 
-    file_label = tk.Label(frame_buttons, text="No file selected")
-    file_label.pack(fill=tk.X)
+    # Commands menu
+    cmd_var = tk.StringVar()
+    flag_var = tk.StringVar()
+    commands_menu = Menu(left_frame, tearoff=0)
 
-    # Command button
-    button_command = tk.Button(frame_buttons, text="Run Volatility Command",
-                               command=lambda: run_volatility_command(volatility_command))
-    button_command.pack(fill=tk.X)
+    # dlllist_plugin
+    dlllist_plugin = Menu(commands_menu, tearoff=0)
+    dlllist_plugin.add_command(label="--pid")
+    dlllist_plugin.add_command(label="--offset")
+    dlllist_plugin.add_command(label="--profile")
+    commands_menu.add_cascade(label="dlllist", menu=dlllist_plugin)
+
+    # psscan_plugin
+    psscan_plugin = Menu(commands_menu, tearoff=0)
+    psscan_plugin.add_command(label="--profile")
+    commands_menu.add_cascade(label="psscan", menu=psscan_plugin)
+
+    # pslist_plugin
+    pslist_plugin = Menu(commands_menu, tearoff=0)
+    pslist_plugin.add_command(label="-P")
+    commands_menu.add_cascade(label="pslist", menu=pslist_plugin)
+
+    # pstree_plugin
+    pstree_plugin = Menu(commands_menu, tearoff=0)
+    commands_menu.add_cascade(label="pstree", menu=pstree_plugin)
+
+    commands_button = ttk.Menubutton(left_frame, text="Commands", menu=commands_menu)
+    commands_button.grid(row=1, column=0, columnspan=2, sticky='ew')
 
     root.grid_rowconfigure(0, weight=1)
     root.grid_rowconfigure(1, weight=1)
