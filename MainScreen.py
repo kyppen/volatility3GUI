@@ -38,16 +38,15 @@ def set_command(current_command, command):
     current_command.set_plugin(command)
     print(f"set_plugin to {command} ")
 
-def get_selected_command(command_list, selected_entry):
-    try:
-        selected_index = command_list.curselection()[0]
-        selected_command = command_list.get(selected_index)
-        print(f"Selected command: {selected_command}")
-        # You can update an entry widget or any other widget with the selected command
-        selected_entry.delete(0, tk.END)
-        selected_entry.insert(0, selected_command)
-    except IndexError:
-        print("No command selected")
+def get_selected_command(listbox, selected_entry):
+    for i in listbox.curselection():
+        print(listbox.get(i))
+        update_selected_from_history(listbox.get(i), selected_entry)
+def update_selected_from_history(command, selected_entry):
+    print("update_selected_from_history()")
+    selected_entry.delete(0, tk.END)
+    selected_entry.insert(0, command)
+
 
 def update_selected(current_command, selected_entry):
     print("update_selected")
@@ -56,10 +55,11 @@ def update_selected(current_command, selected_entry):
     selected_entry.delete(0, tk.END)
     current_command.printString()
     selected_entry.insert(0, current_command.to_string())
-    print(current_command.to_string())
-    print(selected_text)
+    #print(current_command.to_string())
 
-def run_command(current_command, output_text):
+
+def run_command(current_command, output_text, selected_entry):
+    #print("gaygaygay")
     try:
         # Example: subprocess.check_output(['vol.py', '-f', '/path/to/file', 'windows.pslist'])
 
@@ -68,6 +68,7 @@ def run_command(current_command, output_text):
         #print("running command " + ' '.join(command_list))
         commandlist = current_command.getLinuxCommandList() #For linux machines calling python3
         print("running command " + ' '.join(commandlist))
+
         output = subprocess.check_output(commandlist, text=True)
 
         FileHandling.AppendCommandToHistory(current_command)
@@ -85,6 +86,7 @@ def mainScreen(OS, root):
 
     current_command = command.command()
     output_text = tk.StringVar()
+
     root.geometry("600x400")
     def show_selected():
         print(selected_option.get())
@@ -133,7 +135,6 @@ def mainScreen(OS, root):
 
 
     ##Command Menu
-
     flag_menu = Menu(left_frame, tearoff=0)
     flag_button = ttk.Menubutton(left_frame, text="flags", menu=flag_menu)
     flag_menu.add_command(label="-f", command=lambda: current_command.set_flag_button(flag_button, "-f"))
@@ -152,8 +153,19 @@ def mainScreen(OS, root):
     command_menu.add_command(label="psscan", command=lambda:current_command.set_plugin_button(plugin_button, "psscan"))
     plugin_button.grid(row=3, column=0, columnspan=2, sticky="ew")
 
+    # Text field to display selected commands and flags
+    selected_frame = ttk.Frame(root)
+    selected_frame.grid(row=0, column=0, columnspan=2, padx=40, pady=50, sticky='n')
+    selected_label = ttk.Label(selected_frame, text="Selected:")
+    selected_label.grid(row=0, column=0, sticky='w')
+    selected_entry = ttk.Entry(selected_frame, width=100)
+    selected_entry.grid(row=0, column=1, sticky='ew')
+    update_button = ttk.Button(selected_frame, text="Update command", command=lambda :update_selected(current_command, selected_entry))
+    
+    update_button.grid(row=0, column=2, padx=5)
+
     # Save and Reset buttons
-    run_button = ttk.Button(left_frame, text="Run", command=lambda: run_command(current_command,text_with_line_numbers))
+    run_button = ttk.Button(left_frame, text="Run", command=lambda: run_command(current_command,text_with_line_numbers, selected_entry))
     run_button.grid(row=4, column=0, pady=5)
     reset_button = ttk.Button(left_frame, text="Reset")
     reset_button.grid(row=4, column=1, pady=5)
@@ -163,12 +175,12 @@ def mainScreen(OS, root):
     command_frame.grid(row=5, column=0, padx=10, pady=10, sticky='nsew')
     command_label = ttk.Label(command_frame, text="Previous Commands")
     command_label.grid(row=0, column=0, padx=5, pady=5)
-    command_list = tk.Listbox(command_frame)
-    command_list.grid(row=1, column=0, sticky='nsew')
+    #command_list = tk.Listbox(command_frame)
+    #command_list.grid(row=1, column=0, sticky='nsew')
 
     command_frame.grid_rowconfigure(1, weight=1)
     command_frame.grid_columnconfigure(0, weight=1)
-    select_button = ttk.Button(command_frame, text="Get Selected Command", command=lambda :get_selected_command(command_list, selected_entry))
+    select_button = ttk.Button(command_frame, text="Get Selected Command", command=lambda :get_selected_command(prevCommandList, selected_entry))
     select_button.grid(row=2, column=0, columnspan=2, pady=5)
 
     command_scrollbar = ttk.Scrollbar(command_frame)
@@ -178,8 +190,8 @@ def mainScreen(OS, root):
     prevCommandList = tk.Listbox(command_frame, yscrollcommand=command_scrollbar.set)
     prevCommandList.grid(row=1, column=0, sticky='nsew')
     FileHandling.update_history(prevCommandList)
+    prevCommandList.bind("<<ListboxSelect>>", get_selected_command(prevCommandList, selected_entry))
 
-    #prevCommandList.bind('<Double-1>', selectFromHistory)
 
 
     # Text field to display the current file path
@@ -193,16 +205,6 @@ def mainScreen(OS, root):
     browse_button.grid(row=0, column=2, padx=5)
 
 
-    # Text field to display selected commands and flags
-    selected_frame = ttk.Frame(root)
-    selected_frame.grid(row=0, column=0, columnspan=2, padx=40, pady=50, sticky='n')
-    selected_label = ttk.Label(selected_frame, text="Selected:")
-    selected_label.grid(row=0, column=0, sticky='w')
-    selected_entry = ttk.Entry(selected_frame, width=100)
-    selected_entry.grid(row=0, column=1, sticky='ew')
-    update_button = ttk.Button(selected_frame, text="Update command", command=lambda :update_selected(current_command, selected_entry))
-
-    update_button.grid(row=0, column=2, padx=5)
 
     output_frame = ttk.Frame(root)
     output_frame.grid(row=2, column=0, columnspan=2, padx=300, pady=20, sticky='nsew')
@@ -215,7 +217,6 @@ def mainScreen(OS, root):
     # Adjust the left frame's row configurations for proper alignment
     left_frame.grid_rowconfigure(5, weight=1)
     left_frame.grid_columnconfigure(0, weight=1)
-
 
     #log_frame = ttk.Frame(root)
     #left_frame.grid(row=0, column=1, padx=0, pady=10, sticky="ws")
