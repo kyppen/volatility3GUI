@@ -13,7 +13,7 @@ def clear_frame(frame):
 def windows_button(system, frame, root):
     print("Windows")
     clear_frame(frame)
-    MainScreen.mainScreen("Windows", root)
+    MainScreen.mainScreen("windows", root)
 
 def OSX_button(system, frame, root):
     print("OSX")
@@ -23,7 +23,7 @@ def OSX_button(system, frame, root):
 def Linux_button(system, frame, root):
     print("Linux")
     clear_frame(frame)
-    MainScreen.mainScreen("Linux", root )
+    MainScreen.mainScreen("Linux", root)
 
 
 
@@ -35,7 +35,7 @@ button_frame = tk.Frame(root)
 button_frame.grid(row=0, column=0, padx=10, pady=10)
 
 # Create buttons with colors and commands
-button1 = tk.Button(button_frame, text="Windows", bg="white", fg="black", command= lambda:windows_button("Windows", button_frame, root))
+button1 = tk.Button(button_frame, text="Windows", bg="white", fg="black", command= lambda:windows_button("windows", button_frame, root))
 button2 = tk.Button(button_frame, text="OSX", bg="white", fg="black", command= lambda:OSX_button("OSX", button_frame, root))
 button3 = tk.Button(button_frame, text="Linux", bg="white", fg="black", command= lambda:Linux_button("Linux", button_frame, root))
 

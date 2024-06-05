@@ -5,6 +5,10 @@ import command
 import subprocess
 import textBoxNumbers
 import FileHandling
+import os
+import platform
+
+import utils
 
 
 def save_as(output_text):
@@ -31,10 +35,17 @@ def set_command(current_command, command):
     current_command.set_plugin(command)
     print(f"set_plugin to {command} ")
 
-def get_selected_command(listbox, selected_entry):
+def get_selected_command(listbox, selected_entry, output_text, info):
     for i in listbox.curselection():
+        print(f"index {i}")
         print(listbox.get(i))
         update_selected_from_history(listbox.get(i), selected_entry)
+        print(info[0])
+        print(len(info))
+        #print(info[1])
+        output_text.text.delete(1.0, tk.END)
+        output_text.text.insert(1.0, info[1][i])
+
 
 def update_selected_from_history(command, selected_entry):
     print("update_selected_from_history()")
@@ -49,7 +60,7 @@ def update_selected(current_command, selected_entry):
     selected_text = selected_entry
     selected_entry.delete(0, tk.END)
     current_command.printString()
-    selected_entry.insert(0, current_command.to_string())
+    selected_entry.insert(0, current_command.to_string(utils.detect_os()))
     #print(current_command.to_string())
 
 
@@ -79,14 +90,16 @@ def run_command(current_command, output_text, selected_entry, prevCommandList):
     output_text.text.delete("1.0", tk.END)  # Clear the current output
     output_text.text.insert(tk.END, output)  # Insert the new output
     output_text.update_line_numbers()
-    FileHandling.update_history(prevCommandList)
+    #FileHandling.update_history(prevCommandList)
 
 
 def mainScreen(OS, root):
 
     current_command = command.command()
+    #History[0] is a list of previous commands
+    #History[1] is a list of previous outputs
+    #they should match 1:1
     output_text = tk.StringVar()
-
     root.geometry("600x400")
     print("mainScreen")
     print(OS)
@@ -176,9 +189,18 @@ def mainScreen(OS, root):
     #command_list = tk.Listbox(command_frame)
     #command_list.grid(row=1, column=0, sticky='nsew')
 
+    output_frame = ttk.Frame(root)
+    output_frame.grid(row=2, column=0, columnspan=2, padx=300, pady=20, sticky='nsew')
+    root.grid_rowconfigure(2, weight=1)
+    root.grid_columnconfigure(0, weight=1)
+
+    text_with_line_numbers = textBoxNumbers.TextWithLineNumbers(output_frame)
+    text_with_line_numbers.grid(row=0, column=0, sticky='nsew')
+
     command_frame.grid_rowconfigure(1, weight=1)
     command_frame.grid_columnconfigure(0, weight=1)
-    select_button = ttk.Button(command_frame, text="Get Selected Command", command=lambda :get_selected_command(prevCommandList, selected_entry))
+    #def get_selected_command(listbox, selected_entry, output_text, info):
+    select_button = ttk.Button(command_frame, text="Get Selected Command", command=lambda :get_selected_command(prevCommandList, selected_entry, text_with_line_numbers, History))
     select_button.grid(row=2, column=0, columnspan=2, pady=5)
 
     command_scrollbar = ttk.Scrollbar(command_frame)
@@ -187,8 +209,12 @@ def mainScreen(OS, root):
 
     prevCommandList = tk.Listbox(command_frame, yscrollcommand=command_scrollbar.set)
     prevCommandList.grid(row=1, column=0, sticky='nsew')
-    FileHandling.update_history(prevCommandList)
-    prevCommandList.bind("<<ListboxSelect>>", get_selected_command(prevCommandList, selected_entry))
+    History = FileHandling.update_history(prevCommandList)
+    print(f"Length of History {len(History)}")
+    print(f"Length of History[0] {len(History[0])}")
+    print(f"Length of History[1] {len(History[1])}")
+#def get_selected_command(listbox, selected_entry, output_text, info):
+    prevCommandList.bind("<<ListboxSelect>>", get_selected_command(prevCommandList, selected_entry, text_with_line_numbers, History))
 
 
 
@@ -203,14 +229,6 @@ def mainScreen(OS, root):
     browse_button.grid(row=0, column=2, padx=5)
 
 
-
-    output_frame = ttk.Frame(root)
-    output_frame.grid(row=2, column=0, columnspan=2, padx=300, pady=20, sticky='nsew')
-    root.grid_rowconfigure(2, weight=1)
-    root.grid_columnconfigure(0, weight=1)
-
-    text_with_line_numbers = textBoxNumbers.TextWithLineNumbers(output_frame)
-    text_with_line_numbers.grid(row=0, column=0, sticky='nsew')
 
     # Adjust the left frame's row configurations for proper alignment
     left_frame.grid_rowconfigure(5, weight=1)
