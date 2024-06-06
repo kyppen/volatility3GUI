@@ -1,5 +1,9 @@
 import tkinter as tk
 from tkinter import ttk, Menu, filedialog
+
+import utils
+
+
 class command:
     def __init__(self):
         self.flag = None
@@ -37,28 +41,31 @@ class command:
 
     def getOsAndPlugin(self):
         return self.os + '.' + self.plugin
-    def getLinuxCommandList(self):
-        print(self.flag)
-        print(self.filename)
-        print(self.os)
-        print(self.plugin)
-        list = ["/home/fam/volatility3/volatility3/vol.py", self.flag, self.filename, self.getOsAndPlugin()]
-        return list
-    def getWindowsCommandList(self): #untested\
-        print(self.flag)
-        print(self.filename)
-        print(self.os)
-        print(self.plugin)
-        list = ["python", "volatility3/vol.py", self.flag, self.filename, self.getOsAndPlugin()]
-        return list
-    def getOSXCommandList(self):
-        #TODO
-        return
+
+
 
     def to_string(self):
+        detectedOs = utils.detect_os()
+        print(self.plugin)
+        print(self.os)
+        print(self.filename)
+        print(self.flag)
+        print(f"detected OS {detectedOs}")
         if not all([self.os, self.plugin, self.flag, self.filename]):
             raise ValueError("All components (OS, command, flag, and file path) must be set")
-        return f"{self.flag} {self.filename} {self.os}.{self.plugin}"
+        if(detectedOs == "Windows"):
+            print("getCommandList() Windows")
+            #TODO make sure this works
+            #Path to vol.py should be dynamic and we should be able to change it through settings
+            return f"python volatility3-develop//vol.py {self.flag} {self.filename} {self.os}.{self.plugin}"
+        if(detectedOs == "Linux"):
+            print("getCommandList() Linux")
+            #It WoRkS On My MaChInE
+            return f"python3 /home/fam/volatility3/volatility3/vol.py {self.flag} {self.filename} {self.os}.{self.plugin}"
+        if(detectedOs == "Darwin"):
+            #Darwin is the actual output from platform.system() on mac for some reason?
+            #TODO make sure this works
+            return f"Not implemented"
     def printString(self):
         print(self.os)
         print(self.plugin)

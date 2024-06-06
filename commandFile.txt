@@ -2,14 +2,40 @@ python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
 python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
 python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
 python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
-python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.psxview
 python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
-python3 /home/fam/volatility3/volatility3/vol.py psscan benji.raw windows.pslist
--f benji.raw windows.pslist
--f benji.raw windows.psscan
--f benji.raw windows.pslist
--f benji.raw windows.pslist
--f benji.raw windows.pslist
--f benji.raw windows.pslist
--f benji.raw windows.pslist
--f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.psscan
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
+python3 /home/fam/volatility3/volatility3/vol.py -f benji.raw windows.pslist
