@@ -52,8 +52,6 @@ def create_gui():
     output_scroll.grid(row=0, column=1, sticky='ns')
     output_text.config(yscrollcommand=output_scroll.set)
 
-    # Initial Volatility command setup
-
     # Browse file button
     browse_button = ttk.Button(left_frame, text="Browse File", command=browse_file)
     browse_button.grid(row=3, column=0, pady=5)
@@ -66,12 +64,10 @@ def create_gui():
     flag_var = tk.StringVar()
     commands_menu = Menu(left_frame, tearoff=0)
 
-    # dlllist_plugin
-    dlllist_plugin = Menu(commands_menu, tearoff=0)
-    dlllist_plugin.add_command(label="--pid")
-    dlllist_plugin.add_command(label="--offset")
-    dlllist_plugin.add_command(label="--profile")
-    commands_menu.add_cascade(label="dlllist", menu=dlllist_plugin)
+    # psxview_plugin
+    psxview_plugin = Menu(commands_menu, tearoff=0)
+    psxview_plugin.add_command(label="--profile")
+    commands_menu.add_cascade(label="psxview", menu=psxview_plugin)
 
     # psscan_plugin
     psscan_plugin = Menu(commands_menu, tearoff=0)
