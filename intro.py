@@ -167,7 +167,7 @@ def create_main_window():
 def show_welcome_window():
     def transition_to_main(event=None):
         welcome_root.destroy()
-        create_main_window()
+        #create_main_window()
 
     def fade_in_out(step=0, reverse=False):
         alpha = step / 50 if not reverse else 1 - step / 50
@@ -198,7 +198,7 @@ def show_welcome_window():
 
     try:
         # Load and resize the background image
-        image_path = r"C:\smidig\volatility3GUI\images\kawai.webp"  # Use the correct path to your image
+        image_path = r"images\intro.webp"  # Use the correct path to your image
         bg_image = Image.open(image_path).convert("RGBA")
         bg_image = bg_image.resize((800, 600), Image.Resampling.LANCZOS)
         bg_photo = ImageTk.PhotoImage(bg_image)
@@ -207,7 +207,7 @@ def show_welcome_window():
         bg_image_id = welcome_canvas.create_image(0, 0, anchor="nw", image=bg_photo)
 
         # Load the Naruto font
-        font_path = r"C:\smidig\volatility3GUI\ninja_naruto\ninja-naruto.regular.ttf"
+        font_path = r"font\intro_font.ttf"
         if not os.path.isfile(font_path):
             raise OSError(f"Font file not found: {font_path}")
 
@@ -240,4 +240,4 @@ def show_welcome_window():
 
 
 # Start the welcome window event loop
-show_welcome_window()
+#show_welcome_window()
