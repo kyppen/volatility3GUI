@@ -8,9 +8,7 @@ import command as cmd
 import re
 
 
-# import intro
-
-
+# uses system specific save functionality
 def save_as(output_text):
     file_path = filedialog.asksaveasfilename(defaultextension=".txt",
                                              filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
@@ -19,9 +17,12 @@ def save_as(output_text):
             file.write(output_text.text.get(1.0, tk.END))
 
 
-def clear_path():
+# empties the path_entry field
+def clear_path(path_entry):
     path_entry.delete(0, tk.END)
 
+
+# returns the name of host os
 def get_system():
     return platform.system()
 
@@ -45,7 +46,7 @@ def get_selected_command(listbox, output_text, info, mid_text_field):
         print(len(info))
         # print(info[1])
         output_text.text.delete(1.0, tk.END)
-        output_text.text.insert(1.0, info[i].get_output())
+        output_text.text.insert(1.0, info[1][i])
 
 
 def update_selected_from_history(command, mid_text_field):
@@ -68,6 +69,16 @@ def get_os():
 
 # runs command with subproccess and returns result in text form
 def run_command_capture_output(cmd_list):
+def set_pluginAndFlag(current_command, plugin, flag):
+    current_command.set_plugin(plugin)
+    current_command.set_flag(flag)
+    print(current_command.plugin)
+    print(current_command.flag)
+
+
+def run_command(current_command, output_text, prevCommandList, mid_text_field):
+    print("run_command()")
+    # print("Selected_entry: " + selected_entry.get())
     try:
         # Example: subprocess.check_output(['vol.py', '-f', '/path/to/file', 'windows.pslist'])
 
@@ -1094,8 +1105,8 @@ def create_gui():
     prevCommandList.config(yscrollcommand=command_scrollbar.set)
     History = FileHandling.update_history(prevCommandList)
     print(f"Length of History {len(History)}")
-    #print(f"Length of History[0] {len(History)}")
-    #print(f"Length of History[1] {len(History)}")
+    print(f"Length of History[0] {len(History[0])}")
+    print(f"Length of History[1] {len(History[1])}")
 
     select_button = ttk.Button(frame_right, text="Get Selected Command",
                                command=lambda: get_selected_command(prevCommandList, text_with_line_numbers, History,
