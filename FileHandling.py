@@ -2,6 +2,7 @@ import datetime
 import os
 import utils
 import tkinter as tk
+import commandData
 
 
 
@@ -36,9 +37,14 @@ def AppendCommandToHistory(current_command):
     commandFile.close()
 
 
-def AppendCommandAndOutput(current_command, output):
+def AppendCommandAndOutput(command_list, output):
+    print("AppendCommandAndOutput()")
     ts = datetime.datetime.now().timestamp()
-    filename = current_command.getOsAndPlugin()
+
+    #len(full_command)
+    filename = command_list[-1]
+    command_string = " ".join(command_list)
+    #filename = current_command.getOsAndPlugin()
     #print(filename)
     filepath = os.path.join('history', f'{filename}{ts}')
     f = open(filepath, "x")
@@ -49,45 +55,9 @@ def AppendCommandAndOutput(current_command, output):
 
     #else:
     f.write("command:" + "\n")
-    f.write(current_command.to_string() + "\n\n")
+    f.write(command_string + "\n\n")
     f.write(output)
     f.close()
-
-def update_history2(prevCommandList):
-    print("update_history()")
-    path = "history"
-    HistoryList = []
-    outputHistoryList = []
-    for filename in os.listdir(path):
-        output = ""
-        filepath = os.path.join(path, filename)
-        if (os.path.isfile(filepath)):
-
-            file = open(filepath, "r")
-            fileList = file.readlines()
-            file.close()
-            #print(fileList[0])
-            #if(len(fileList) < 3):
-            #    break
-            if (fileList[0].strip() == 'command:'):
-                print("Line 0 == command:")
-                command = fileList[1]
-                #print(command)
-                HistoryList.append(command)
-                for line in fileList:
-                    output = output + line
-                outputHistoryList.append(output)
-    info = []
-    info.append(HistoryList)
-    info.append(outputHistoryList)
-    count = 0
-    prevCommandList.delete(0, tk.END)
-    for command in HistoryList:
-        print(command)
-
-        prevCommandList.insert(count, command)
-        count += 1
-    return info
 
 def getHistoryFromFile():
     print("update_history()")
@@ -96,28 +66,27 @@ def getHistoryFromFile():
     output = ""
 
     for filename in os.listdir(path):
-        cmdOutput = ""
-        print("for loop")
-        filepath = os.path.join(path, filename)
         Data = commandData.commandData()
+        cmdOutput = ""
+        filepath = os.path.join(path, filename)
         if (os.path.isfile(filepath)):
 
             file = open(filepath, "r")
             fileList = file.readlines()
             file.close()
-            #print(fileList[0])
-            #if (fileList[0].strip() == 'command:'):
+            if fileList[0].strip() == 'command:':
+                print(fileList[0])
+                temp = fileList[1]
+                Data.set_command(temp)
 
-            temp = fileList[1]
-            Data.set_command(temp)
-
-            for line in fileList:
-                output = output + line
-            Data.set_output(output)
+                for line in fileList:
+                    output = output + line
+                Data.set_output(output)
         HistoryList.append(Data)
     return HistoryList
 
 def update_history(prevCommandList):
+    print("update_history()")
     info = getHistoryFromFile()
     count = 0
     prevCommandList.delete(0, tk.END)
