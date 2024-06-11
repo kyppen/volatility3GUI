@@ -1,0 +1,13 @@
+command:
+python3 /home/fam/volatility3-develop/vol.py -f .dlllist --psscan
+
+usage: volatility [-h] [-c CONFIG] [--parallelism [{processes,threads,off}]]
+                  [-e EXTEND] [-p PLUGIN_DIRS] [-s SYMBOL_DIRS] [-v] [-l LOG]
+                  [-o OUTPUT_DIR] [-q] [-r RENDERER] [-f FILE]
+                  [--write-config] [--save-config SAVE_CONFIG] [--clear-cache]
+                  [--cache-path CACHE_PATH] [--offline] [--filters FILTERS]
+                  [--single-location SINGLE_LOCATION]
+                  [--stackers [STACKERS ...]]
+                  [--single-swap-locations [SINGLE_SWAP_LOCATIONS ...]]
+                  plugin ...
+volatility: error: unrecognized arguments: --psscan
