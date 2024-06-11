@@ -198,7 +198,7 @@ def show_welcome_window():
 
     try:
         # Load and resize the background image
-        image_path = r"images\intro.webp"  # Use the correct path to your image
+        image_path = os.path.join('images', 'intro.webp')  # Use the correct path to your image
         bg_image = Image.open(image_path).convert("RGBA")
         bg_image = bg_image.resize((800, 600), Image.Resampling.LANCZOS)
         bg_photo = ImageTk.PhotoImage(bg_image)
@@ -207,7 +207,7 @@ def show_welcome_window():
         bg_image_id = welcome_canvas.create_image(0, 0, anchor="nw", image=bg_photo)
 
         # Load the Naruto font
-        font_path = r"font\intro_font.ttf"
+        font_path = os.path.join('font', 'intro_font.ttf')
         if not os.path.isfile(font_path):
             raise OSError(f"Font file not found: {font_path}")
 
@@ -217,7 +217,8 @@ def show_welcome_window():
         text_image = Image.new("RGBA", (800, 600), (255, 255, 255, 0))
         draw = ImageDraw.Draw(text_image)
         draw.text((300, 250), "TSUKYOMI", font=naruto_font, fill="white")
-        draw.text((300, 320), "Forensics & Analysis", font=ImageFont.truetype("arial.ttf", 24), fill="white")
+        arial_font = os.path.join('font', 'arial.ttf')
+        draw.text((300, 320), "Forensics & Analysis", font=ImageFont.truetype(arial_font, 24), fill="white")
         text_photo = ImageTk.PhotoImage(text_image)
 
         # Create a text item on the canvas
@@ -225,7 +226,7 @@ def show_welcome_window():
         welcome_canvas.text_photo = text_photo  # Keep a reference to avoid garbage collection
 
         # Create dot text on the canvas
-        dot_id = welcome_canvas.create_text(400, 380, text="", font=("Arial", 43), fill="white")
+        dot_id = welcome_canvas.create_text(400, 380, text="", font=(arial_font, 43), fill="white")
 
         welcome_root.after(500, fade_in_out)  # Start the fade effect after a brief delay
         welcome_root.after(500, animate_dots)  # Start the dot animation
