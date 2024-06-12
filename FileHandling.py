@@ -47,17 +47,16 @@ def AppendCommandAndOutput(command_list, output):
     f.close()
 
 def getHistoryFromFile():
-    path = "history"
     HistoryList = []
     historypath = os.path.join(os.path.curdir, 'history')
     if not os.path.exists(historypath):
         os.makedirs(historypath)
 
-    for filename in os.listdir(path):
+    for filename in os.listdir(historypath):
         Data = commandData.commandData()
         Data.set_command("")
         Data.set_output("")
-        filepath = os.path.join(path, filename)
+        filepath = os.path.join(historypath, filename)
         if (os.path.isfile(filepath)):
 
             file = open(filepath, "r")
