@@ -1,5 +1,5 @@
 command:
-python3 /home/fam/volatility3-develop/vol.py -f /home/fam/Kristiania/2/smidig2/volatility3GUI/benji.raw windows.pslist
+python3 /home/fam/volatility3-develop/vol.py -f /home/fam/Kristiania/2/smidig2/volatility3GUI/benji.raw windows.pslist -folder -loaclal ads asd asd ads asd asd 
 
 Volatility 3 Framework 2.7.1
 

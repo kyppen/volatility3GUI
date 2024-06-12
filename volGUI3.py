@@ -7,6 +7,7 @@ import FileHandling
 import textBoxNumbers
 import command as cmd
 import re
+import utils
 import searchInFile
 
 
@@ -213,12 +214,12 @@ def add_userinput_to_command(flag, cmd_list):
 # resets the command list
 def reset_command_list(cmd_list, file_path):
     cmd_list.clear()
-    if get_system() == "Windows":
-        cmd_list.append("python")
-        cmd_list.append("/home/bolle/Documents/volatility3/vol.py")
-    else:
-        cmd_list.append("python3")
-        cmd_list.append("/home/bolle/Documents/volatility3/vol.py")
+
+    vol_py = os.path.join(os.path.curdir, 'volatility3', 'vol.py')
+    python_version = utils.get_python_command()
+
+    cmd_list.append(python_version)
+    cmd_list.append(vol_py)
 
     cmd_list.append("-f")
     cmd_list.append(file_path)
@@ -1330,8 +1331,7 @@ def create_gui():
                          get_selected_command(prevCommandList, text_with_line_numbers, History, mid_text_field))
 
     run_button = ttk.Button(frame_mid, text="Run",
-                            command=lambda: run_command(command_list, text_with_line_numbers, prevCommandList,
-                                                        mid_text_field))
+                            command=lambda: run_command(command_list, text_with_line_numbers, prevCommandList))
     run_button.grid(row=0, column=1, padx=5, pady=5, sticky='w')
 
     update_button = ttk.Button(frame_mid, text="Update", command=lambda: update_cmd(command_list, mid_text_field))
