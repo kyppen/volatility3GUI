@@ -10,6 +10,7 @@ import command as cmd
 import re
 import utils
 import searchInFile
+from PIL import Image, ImageTk
 
 
 # uses system specific save functionality
@@ -243,7 +244,7 @@ def create_gui():
 
     root = tk.Tk()
     root.title("Volatility 3")
-    root.configure(bg="#f2f2e9")
+    root['bg'] = 'black'
 
     menubar_frame = ttk.Frame(root, height=30)
     menubar_frame.grid(row=0, column=0, columnspan=3, sticky='ew')
@@ -327,9 +328,10 @@ def create_gui():
     root.grid_columnconfigure(1, weight=2)
     root.grid_columnconfigure(2, weight=1)
 
-    path_frame = ttk.Frame(frame_left, padding="1 1 1 1", style='TFrame')
+    path_frame = ttk.Frame(frame_left,padding="1 1 1 1", style='TFrame')
     path_frame.grid(row=0, column=1, padx=1, pady=1, sticky='ew')
     path_label = ttk.Label(path_frame, text="File Path:")
+
     path_label.grid(row=0, column=0, sticky='w')
     path_entry = ttk.Entry(path_frame, width=20)
     path_entry.grid(row=0, column=1, sticky='ew')
