@@ -1,4 +1,4 @@
-# **Tsukiyomi**. A Volatility 3 GUI by Cassiopeia
+# **Tsukyomi**. A Volatility 3 GUI by Cassiopeia
 <br/>
 <br/>
 
