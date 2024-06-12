@@ -49,26 +49,42 @@ def browse_files(command_list, path_entry):
         add_filepath_to_command(file_path, command_list)
 
 
-def get_selected_command(listbox, output_text, History, mid_text_field):
+def get_selected_command(listbox, output_text, mid_text_field,prevCommandList):
     for i in listbox.curselection():
-        print(listbox.get(i))
-        update_selected_from_history(listbox.get(i), mid_text_field, History[i])
-        output_text.text.delete(1.0, tk.END)
-        output_text.text.insert(1.0, History[i].output)
+        print("get_selected_command()")
+        #print(listbox.get(i))
+        #print(i)
+        print("History[i].output")
+        #print(History[i].get_command())
+        print("History[i].output")
+        #print(History[i].output)
+        History = FileHandling.update_history(prevCommandList)
+        update_selected_from_history(listbox.get(i), output_text,mid_text_field, History[i])
+        #mid_text_field.delete(0, tk.END)
+        #mid_text_field.insert(0, History[i].get_command())
 
+        #output_text.text.delete("1.0", tk.END)
+        #output_text.text.insert("1.0", History[i].get_output())
+        #output_text.update_line_numbers()
+        #output_text.text.delete(1.0, tk.END)
+        #output_text.text.insert(1.0, History[i].output)
 
     #Takes a object and displays them in the history window
-def update_selected_from_history(command, mid_text_field, cmd_and_output):
-    print(cmd_and_output.get_command_formatted())
-    print(cmd_and_output.get_command())
+def update_selected_from_history(command, output_text,mid_text_field, cmd_and_output):
+    #print(cmd_and_output.get_command_formatted())
+    #print(cmd_and_output.get_command())
     command.strip()
+    output_text.text.delete(1.0, tk.END)
+    output_text.text.insert(1.0, cmd_and_output.get_output())
+    output_text.update_line_numbers()
     mid_text_field.delete(0, tk.END)
-    mid_text_field.insert(0, cmd_and_output.get_command())
+    mid_text_field.insert(0, cmd_and_output.get_command().strip())
+
 
 
 def set_os(os_name, os_entry, current_command):
     current_command.set_os(os_name)
-    print(current_command.os)
+    #print(current_command.os)
     os_entry.delete(0, tk.END)
     os_entry.insert(0, os_name)
 
@@ -91,6 +107,7 @@ def run_command_capture_output(cmd_list):
         return e.stderr
 
 
+
 def clear_output(output_text):
     output_text.text.delete(1.0, tk.END)
     output_text.update_line_numbers()
@@ -98,17 +115,27 @@ def clear_output(output_text):
 
 # calls on run_command_capture_output and writes return value to mid_text_field
 def run_command(command_list, output_text, prevCommandList):
-    print("run_command()")
+    #print("run_command()")
     clear_output(output_text)
 
     # command_str_list = command_list.to_string().split(" ")
     output = run_command_capture_output(command_list)
+    print("output")
+    if "usage: volatility" in output:
+        print("Command Failed")
+        print(output)
+        output_text.text.delete(1.0, tk.END)
+        output_error = "There was an error processing the command: \n"
+        output_error += output
+        output_text.text.insert(tk.END, output_error)
+        output_text.update_line_numbers()
 
-    output_text.text.delete(1.0, tk.END)
-    output_text.text.insert(tk.END, output)
-    output_text.update_line_numbers()
-    FileHandling.AppendCommandAndOutput(command_list, output)
-    FileHandling.update_history(prevCommandList)
+    else:
+        output_text.text.delete(1.0, tk.END)
+        output_text.text.insert(tk.END, output)
+        output_text.update_line_numbers()
+        FileHandling.AppendCommandAndOutput(command_list, output)
+        FileHandling.update_history(prevCommandList)
 
 
 # adds plugin and flag to command list
@@ -164,7 +191,7 @@ def check_if_flag_takes_input(flag):
 
 
 def search_in_output(text_with_line_numbers):
-    print("search_in_output()")
+
     root = tk.Tk()
     root.withdraw()
     search_word = simpledialog.askstring("input:", "Enter String")
@@ -1295,13 +1322,11 @@ def create_gui():
     prevCommandList.config(yscrollcommand=command_scrollbar.set)
     History = FileHandling.update_history(prevCommandList)
 
-    # print(f"Length of History {len(History)}")
-    # print(f"Length of History[0] {len(History[0])}")
-    # print(f"Length of History[1] {len(History[1])}")
+
 
     select_button = ttk.Button(frame_right, text="Get Selected Command",
-                               command=lambda: get_selected_command(prevCommandList, text_with_line_numbers, History,
-                                                                    mid_text_field))
+                               command=lambda: get_selected_command(prevCommandList, text_with_line_numbers,
+                                                                    mid_text_field, prevCommandList))
     select_button.grid(row=2, column=0, columnspan=2, pady=5)
 
     prevCommandList.pack()
@@ -1310,7 +1335,7 @@ def create_gui():
     mid_text_field.grid(row=0, column=0, padx=5, pady=5, sticky='w')
     mid_text_field.insert(0, "filename.txt / dlllist / --offset")
     prevCommandList.bind("<<ListboxSelect>>",
-                         get_selected_command(prevCommandList, text_with_line_numbers, History, mid_text_field))
+                         get_selected_command(prevCommandList, text_with_line_numbers, mid_text_field, prevCommandList))
 
     run_button = ttk.Button(frame_mid, text="Run",
                             command=lambda: run_command(command_list, text_with_line_numbers, prevCommandList))

@@ -8,12 +8,9 @@ import commandData
 
 def getFileNameFromCommand(selected_entry):
     words = selected_entry.get()
-    print(words)
     words.strip()
     wordReplacedspace = words.replace(" ", ".")
-    print(wordReplacedspace)
     wordList = wordReplacedspace.split(".")
-    print(wordReplacedspace)
     filename = "undefined"
     count = 0
     for word in wordList:
@@ -52,10 +49,11 @@ def AppendCommandAndOutput(command_list, output):
 def getHistoryFromFile():
     path = "history"
     HistoryList = []
-    output = ""
 
     for filename in os.listdir(path):
         Data = commandData.commandData()
+        Data.set_command("")
+        Data.set_output("")
         filepath = os.path.join(path, filename)
         if (os.path.isfile(filepath)):
 
@@ -63,23 +61,22 @@ def getHistoryFromFile():
             fileList = file.readlines()
             file.close()
             if fileList[0].strip() == 'command:':
-                print(fileList[0])
                 temp = fileList[1]
                 Data.set_command(temp)
 
-                for line in fileList:
-                    output = output + line
+                output = ''.join(fileList)
                 Data.set_output(output)
         HistoryList.append(Data)
+
+
+    print(f"History Length: {len(HistoryList)}")
     return HistoryList
 
 def update_history(prevCommandList):
-    print("update_history()")
     info = getHistoryFromFile()
     count = 0
     prevCommandList.delete(0, tk.END)
     for command in info:
-        print(command.get_command())
 
         prevCommandList.insert(count, command.get_command_formatted())
         count += 1
