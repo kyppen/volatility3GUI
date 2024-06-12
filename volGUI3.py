@@ -4,6 +4,7 @@ from tkinter import ttk, Menu, filedialog, simpledialog
 import platform
 import subprocess
 import FileHandling
+import intro
 import textBoxNumbers
 import command as cmd
 import re
@@ -106,6 +107,7 @@ def run_command(command_list, output_text, prevCommandList):
     output_text.text.delete(1.0, tk.END)
     output_text.text.insert(tk.END, output)
     output_text.update_line_numbers()
+    FileHandling.AppendCommandAndOutput(command_list, output)
     FileHandling.update_history(prevCommandList)
 
 
@@ -225,6 +227,7 @@ def reset_and_update(cmd_list, mid_text_field):
 
 # builds the GUI
 def create_gui():
+    intro.show_welcome_window()
     current_command = cmd.command()
     command_list = []
     command_list = reset_command_list(command_list, "")
@@ -263,8 +266,6 @@ def create_gui():
     os_menu.add_command(label="Windows", command=lambda: set_os("windows", os_entry, current_command))
     os_menu.add_command(label="MacOS", command=lambda: set_os("MacOs", os_entry, current_command))
     os_menu.add_command(label="Linux", command=lambda: set_os("linux", os_entry, current_command))
-    os_menu.add_command(label="RedStarOS", command=lambda: set_os("RedStarOS", os_entry, current_command))
-    os_menu.add_command(label="TempleOS", command=lambda: set_os("TempleOS", os_entry, current_command))
     menu_bar.add_cascade(label="OS", menu=os_menu)
 
     root.config(menu=menu_bar)
