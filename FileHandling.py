@@ -29,7 +29,6 @@ def getFileNameFromCommand(selected_entry):
             break
 
     filename = filename + "." + wordList[count]
-    #print(filename)
     return filename
 def AppendCommandToHistory(current_command):
     commandFile = open(f"commandFile.txt", "a+")
@@ -38,36 +37,25 @@ def AppendCommandToHistory(current_command):
 
 
 def AppendCommandAndOutput(command_list, output):
-    print("AppendCommandAndOutput()")
     ts = datetime.datetime.now().timestamp()
 
-    #len(full_command)
     filename = command_list[-1]
     command_string = " ".join(command_list)
-    #filename = current_command.getOsAndPlugin()
-    #print(filename)
     filepath = os.path.join('history', f'{filename}{ts}')
     f = open(filepath, "x")
 
-    #if(command == ""):
-        #f.write("command:" + "\n")
-        #f.write(selected_entry.get() + "\n\n")
-
-    #else:
     f.write("command:" + "\n")
     f.write(command_string + "\n\n")
     f.write(output)
     f.close()
 
 def getHistoryFromFile():
-    print("update_history()")
     path = "history"
     HistoryList = []
     output = ""
 
     for filename in os.listdir(path):
         Data = commandData.commandData()
-        cmdOutput = ""
         filepath = os.path.join(path, filename)
         if (os.path.isfile(filepath)):
 

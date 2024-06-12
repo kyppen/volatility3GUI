@@ -49,7 +49,6 @@ def browse_files(command_list, path_entry):
 
 
 def get_selected_command(listbox, output_text, History, mid_text_field):
-    print("get_selected_command()")
     for i in listbox.curselection():
         print(listbox.get(i))
         update_selected_from_history(listbox.get(i), mid_text_field, History[i])
@@ -57,16 +56,15 @@ def get_selected_command(listbox, output_text, History, mid_text_field):
         output_text.text.insert(1.0, History[i].output)
 
 
-def update_selected_from_history(command, mid_text_field, History):
-    print("update_selected_from_history()")
-    print(History.get_command_formatted())
-    print(History.get_command())
+    #Takes a object and displays them in the history window
+def update_selected_from_history(command, mid_text_field, cmd_and_output):
+    print(cmd_and_output.get_command_formatted())
+    print(cmd_and_output.get_command())
     command.strip()
     mid_text_field.delete(0, tk.END)
-    mid_text_field.insert(0, History.get_command())
+    mid_text_field.insert(0, cmd_and_output.get_command())
 
 
-#
 def set_os(os_name, os_entry, current_command):
     current_command.set_os(os_name)
     print(current_command.os)
@@ -80,23 +78,6 @@ def get_os(os_entry):
 
 
 # runs command with subproccess and returns result in text form
-
-def run_command_capture_output2(cmd_list, output_text):
-    if cmd_list:
-        try:
-            # Run the command
-            result = subprocess.run(cmd_list, shell=True, text=True, capture_output=True)
-
-            # Clear previous output
-            output_text.text.delete(1.0, tk.END)
-
-            # Display the command output
-            output_text.text.insert(tk.END, result.stdout)
-            output_text.text.insert(tk.END, result.stderr)
-
-        except Exception as e:
-            output_text.output_text.insert(tk.END, f"Error running command: {e}")
-
 
 def run_command_capture_output(cmd_list):
     try:
