@@ -346,8 +346,12 @@ def create_gui():
     cmd_var = tk.StringVar()
     flag_var = tk.StringVar()
     commands_menu = Menu(frame_center, tearoff=0)
+
     # Bigpools_plugin
     Bigpools_plugin = Menu(commands_menu, tearoff=0)
+    bigpools_kernel_var = tk.BooleanVar()
+    Bigpools_plugin.add_checkbutton(label="no flags", variable=bigpools_kernel_var,
+                                    command=lambda: add_to_command("bigpools", "", command_list, os_entry))
     bigpools_kernel_var = tk.BooleanVar()
     Bigpools_plugin.add_checkbutton(label="-kernel", variable=bigpools_kernel_var,
                                     command=lambda: add_to_command("bigpools", "-kernel", command_list, os_entry))
@@ -361,6 +365,9 @@ def create_gui():
 
     # Cachedump_plugin
     Cachedump_plugin = Menu(commands_menu, tearoff=0)
+    cachedump_kernel_var = tk.BooleanVar()
+    Cachedump_plugin.add_checkbutton(label="no flags", variable=cachedump_kernel_var,
+                                     command=lambda: add_to_command("cachedump", "", command_list, os_entry))
     cachedump_kernel_var = tk.BooleanVar()
     Cachedump_plugin.add_checkbutton(label="-kernel", variable=cachedump_kernel_var,
                                      command=lambda: add_to_command("cachedump", "-kernel", command_list, os_entry))
@@ -378,6 +385,9 @@ def create_gui():
     # Callbacks_plugin
     Callbacks_plugin = Menu(commands_menu, tearoff=0)
     callbacks_kernel_var = tk.BooleanVar()
+    Callbacks_plugin.add_checkbutton(label="no flags", variable=callbacks_kernel_var,
+                                     command=lambda: add_to_command("callbacks", "", command_list, os_entry))
+    callbacks_kernel_var = tk.BooleanVar()
     Callbacks_plugin.add_checkbutton(label="-kernel", variable=callbacks_kernel_var,
                                      command=lambda: add_to_command("callbacks", "-kernel", command_list, os_entry))
     callbacks_ssdt_var = tk.BooleanVar()
@@ -387,6 +397,9 @@ def create_gui():
 
     # Cmdline_plugin
     Cmdline_plugin = Menu(commands_menu, tearoff=0)
+    cmdline_kernel_var = tk.BooleanVar()
+    Cmdline_plugin.add_checkbutton(label="no flags", variable=cmdline_kernel_var,
+                                   command=lambda: add_to_command("cmdline", "", command_list, os_entry))
     cmdline_kernel_var = tk.BooleanVar()
     Cmdline_plugin.add_checkbutton(label="-kernel", variable=cmdline_kernel_var,
                                    command=lambda: add_to_command("cmdline", "-kernel", command_list, os_entry))
@@ -401,12 +414,18 @@ def create_gui():
     # Crashinfo_plugin
     Crashinfo_plugin = Menu(commands_menu, tearoff=0)
     crashinfo_primary_var = tk.BooleanVar()
+    Crashinfo_plugin.add_checkbutton(label="no flags", variable=crashinfo_primary_var,
+                                     command=lambda: add_to_command("crashinfo", "", command_list, os_entry))
+    crashinfo_primary_var = tk.BooleanVar()
     Crashinfo_plugin.add_checkbutton(label="-primary", variable=crashinfo_primary_var,
                                      command=lambda: add_to_command("crashinfo", "-primary", command_list, os_entry))
     commands_menu.add_cascade(label="Crashinfo", menu=Crashinfo_plugin)
 
     # Devicetree_plugin
     Devicetree_plugin = Menu(commands_menu, tearoff=0)
+    devicetree_kernel_var = tk.BooleanVar()
+    Devicetree_plugin.add_checkbutton(label="no flags", variable=devicetree_kernel_var,
+                                      command=lambda: add_to_command("devicetree", "", command_list, os_entry))
     devicetree_kernel_var = tk.BooleanVar()
     Devicetree_plugin.add_checkbutton(label="-kernel", variable=devicetree_kernel_var,
                                       command=lambda: add_to_command("devicetree", "-kernel", command_list, os_entry))
@@ -419,7 +438,7 @@ def create_gui():
     # Dlllist_plugin
     Dlllist_plugin = Menu(commands_menu, tearoff=0)
     dlllist_kernel_var = tk.BooleanVar()
-    Dlllist_plugin.add_checkbutton(label="-noflag", variable=dlllist_kernel_var,
+    Dlllist_plugin.add_checkbutton(label="no flag", variable=dlllist_kernel_var,
                                    command=lambda: add_to_command("pslist", "", command_list, os_entry))
     dlllist_kernel_var = tk.BooleanVar()
     Dlllist_plugin.add_checkbutton(label="-kernel", variable=dlllist_kernel_var,
@@ -447,6 +466,9 @@ def create_gui():
     # Driverirp_plugin
     Driverirp_plugin = Menu(commands_menu, tearoff=0)
     driverirp_kernel_var = tk.BooleanVar()
+    Driverirp_plugin.add_checkbutton(label="no flags", variable=driverirp_kernel_var,
+                                     command=lambda: add_to_command("driverirp", "", command_list, os_entry))
+    driverirp_kernel_var = tk.BooleanVar()
     Driverirp_plugin.add_checkbutton(label="-kernel", variable=driverirp_kernel_var,
                                      command=lambda: add_to_command("driverirp", "-kernel", command_list, os_entry))
     driverirp_ssdt_var = tk.BooleanVar()
@@ -459,6 +481,10 @@ def create_gui():
 
     # Drivermodule_plugin
     Drivermodule_plugin = Menu(commands_menu, tearoff=0)
+    drivermodule_kernel_var = tk.BooleanVar()
+    Drivermodule_plugin.add_checkbutton(label="no flags", variable=drivermodule_kernel_var,
+                                        command=lambda: add_to_command("drivermodule", "", command_list,
+                                                                       os_entry))
     drivermodule_kernel_var = tk.BooleanVar()
     Drivermodule_plugin.add_checkbutton(label="-kernel", variable=drivermodule_kernel_var,
                                         command=lambda: add_to_command("drivermodule", "-kernel", command_list,
@@ -475,6 +501,9 @@ def create_gui():
     # Driverscan_plugin
     Driverscan_plugin = Menu(commands_menu, tearoff=0)
     driverscan_kernel_var = tk.BooleanVar()
+    Driverscan_plugin.add_checkbutton(label="no flags", variable=driverscan_kernel_var,
+                                      command=lambda: add_to_command("driverscan", "", command_list, os_entry))
+    driverscan_kernel_var = tk.BooleanVar()
     Driverscan_plugin.add_checkbutton(label="-kernel", variable=driverscan_kernel_var,
                                       command=lambda: add_to_command("driverscan", "-kernel", command_list, os_entry))
     driverscan_poolscanner_var = tk.BooleanVar()
@@ -485,6 +514,9 @@ def create_gui():
 
     # Dumpfiles_plugin
     Dumpfiles_plugin = Menu(commands_menu, tearoff=0)
+    dumpfiles_kernel_var = tk.BooleanVar()
+    Dumpfiles_plugin.add_checkbutton(label="no flags", variable=dumpfiles_kernel_var,
+                                     command=lambda: add_to_command("dumpfiles", "", command_list, os_entry))
     dumpfiles_kernel_var = tk.BooleanVar()
     Dumpfiles_plugin.add_checkbutton(label="-kernel", variable=dumpfiles_kernel_var,
                                      command=lambda: add_to_command("dumpfiles", "-kernel", command_list, os_entry))
@@ -515,6 +547,9 @@ def create_gui():
     # Envars_plugin
     Envars_plugin = Menu(commands_menu, tearoff=0)
     envars_kernel_var = tk.BooleanVar()
+    Envars_plugin.add_checkbutton(label="no flags", variable=envars_kernel_var,
+                                  command=lambda: add_to_command("envars", "", command_list, os_entry))
+    envars_kernel_var = tk.BooleanVar()
     Envars_plugin.add_checkbutton(label="-kernel", variable=envars_kernel_var,
                                   command=lambda: add_to_command("envars", "-kernel", command_list, os_entry))
     envars_pid_var = tk.BooleanVar()
@@ -534,6 +569,9 @@ def create_gui():
     # Filescan_plugin
     Filescan_plugin = Menu(commands_menu, tearoff=0)
     filescan_kernel_var = tk.BooleanVar()
+    Filescan_plugin.add_checkbutton(label="no flags", variable=filescan_kernel_var,
+                                    command=lambda: add_to_command("filescan", "", command_list, os_entry))
+    filescan_kernel_var = tk.BooleanVar()
     Filescan_plugin.add_checkbutton(label="-kernel", variable=filescan_kernel_var,
                                     command=lambda: add_to_command("filescan", "-kernel", command_list, os_entry))
     filescan_poolscanner_var = tk.BooleanVar()
@@ -543,6 +581,10 @@ def create_gui():
 
     # Getservicesids_plugin
     Getservicesids_plugin = Menu(commands_menu, tearoff=0)
+    getservicesids_kernel_var = tk.BooleanVar()
+    Getservicesids_plugin.add_checkbutton(label="no flags", variable=getservicesids_kernel_var,
+                                          command=lambda: add_to_command("getservicesids", "", command_list,
+                                                                         os_entry))
     getservicesids_kernel_var = tk.BooleanVar()
     Getservicesids_plugin.add_checkbutton(label="-kernel", variable=getservicesids_kernel_var,
                                           command=lambda: add_to_command("getservicesids", "-kernel", command_list,
@@ -555,6 +597,9 @@ def create_gui():
 
     # Getsids_plugin
     Getsids_plugin = Menu(commands_menu, tearoff=0)
+    getsids_kernel_var = tk.BooleanVar()
+    Getsids_plugin.add_checkbutton(label="no flags", variable=getsids_kernel_var,
+                                   command=lambda: add_to_command("getsids", "", command_list, os_entry))
     getsids_kernel_var = tk.BooleanVar()
     Getsids_plugin.add_checkbutton(label="-kernel", variable=getsids_kernel_var,
                                    command=lambda: add_to_command("getsids", "-kernel", command_list, os_entry))
@@ -571,6 +616,9 @@ def create_gui():
 
     # Handles_plugin
     Handles_plugin = Menu(commands_menu, tearoff=0)
+    handles_kernel_var = tk.BooleanVar()
+    Handles_plugin.add_checkbutton(label="no flags", variable=handles_kernel_var,
+                                   command=lambda: add_to_command("handles", "", command_list, os_entry))
     handles_kernel_var = tk.BooleanVar()
     Handles_plugin.add_checkbutton(label="-kernel", variable=handles_kernel_var,
                                    command=lambda: add_to_command("handles", "-kernel", command_list, os_entry))
@@ -591,6 +639,9 @@ def create_gui():
     # Hashdump_plugin
     Hashdump_plugin = Menu(commands_menu, tearoff=0)
     hashdump_kernel_var = tk.BooleanVar()
+    Hashdump_plugin.add_checkbutton(label="no flags", variable=hashdump_kernel_var,
+                                    command=lambda: add_to_command("hashdump", "", command_list, os_entry))
+    hashdump_kernel_var = tk.BooleanVar()
     Hashdump_plugin.add_checkbutton(label="-kernel", variable=hashdump_kernel_var,
                                     command=lambda: add_to_command("hashdump", "-kernel", command_list, os_entry))
     hashdump_hivelist_var = tk.BooleanVar()
@@ -600,6 +651,9 @@ def create_gui():
 
     # Iat_plugin
     Iat_plugin = Menu(commands_menu, tearoff=0)
+    iat_kernel_var = tk.BooleanVar()
+    Iat_plugin.add_checkbutton(label="no flags", variable=iat_kernel_var,
+                               command=lambda: add_to_command("iat", "", command_list, os_entry))
     iat_kernel_var = tk.BooleanVar()
     Iat_plugin.add_checkbutton(label="-kernel", variable=iat_kernel_var,
                                command=lambda: add_to_command("iat", "-kernel", command_list, os_entry))
@@ -614,12 +668,18 @@ def create_gui():
     # Info_plugin
     Info_plugin = Menu(commands_menu, tearoff=0)
     info_kernel_var = tk.BooleanVar()
+    Info_plugin.add_checkbutton(label="no flags", variable=info_kernel_var,
+                                command=lambda: add_to_command("info", "", command_list, os_entry))
+    info_kernel_var = tk.BooleanVar()
     Info_plugin.add_checkbutton(label="-kernel", variable=info_kernel_var,
                                 command=lambda: add_to_command("info", "-kernel", command_list, os_entry))
     commands_menu.add_cascade(label="Info", menu=Info_plugin)
 
     # Joblinks_plugin
     Joblinks_plugin = Menu(commands_menu, tearoff=0)
+    joblinks_kernel_var = tk.BooleanVar()
+    Joblinks_plugin.add_checkbutton(label="no flags", variable=joblinks_kernel_var,
+                                    command=lambda: add_to_command("joblinks", "", command_list, os_entry))
     joblinks_kernel_var = tk.BooleanVar()
     Joblinks_plugin.add_checkbutton(label="-kernel", variable=joblinks_kernel_var,
                                     command=lambda: add_to_command("joblinks", "-kernel", command_list, os_entry))
@@ -633,6 +693,9 @@ def create_gui():
 
     # Ldrmodules_plugin
     Ldrmodules_plugin = Menu(commands_menu, tearoff=0)
+    ldrmodules_kernel_var = tk.BooleanVar()
+    Ldrmodules_plugin.add_checkbutton(label="no flags", variable=ldrmodules_kernel_var,
+                                      command=lambda: add_to_command("ldrmodules", "", command_list, os_entry))
     ldrmodules_kernel_var = tk.BooleanVar()
     Ldrmodules_plugin.add_checkbutton(label="-kernel", variable=ldrmodules_kernel_var,
                                       command=lambda: add_to_command("ldrmodules", "-kernel", command_list, os_entry))
@@ -650,6 +713,9 @@ def create_gui():
     # Lsadump_plugin
     Lsadump_plugin = Menu(commands_menu, tearoff=0)
     lsadump_kernel_var = tk.BooleanVar()
+    Lsadump_plugin.add_checkbutton(label="no flags", variable=lsadump_kernel_var,
+                                   command=lambda: add_to_command("lsadump", "", command_list, os_entry))
+    lsadump_kernel_var = tk.BooleanVar()
     Lsadump_plugin.add_checkbutton(label="-kernel", variable=lsadump_kernel_var,
                                    command=lambda: add_to_command("lsadump", "-kernel", command_list, os_entry))
     lsadump_hashdump_var = tk.BooleanVar()
@@ -662,6 +728,9 @@ def create_gui():
 
     # Malfind_plugin
     Malfind_plugin = Menu(commands_menu, tearoff=0)
+    malfind_kernel_var = tk.BooleanVar()
+    Malfind_plugin.add_checkbutton(label="no flags", variable=malfind_kernel_var,
+                                   command=lambda: add_to_command("malfind", "", command_list, os_entry))
     malfind_kernel_var = tk.BooleanVar()
     Malfind_plugin.add_checkbutton(label="-kernel", variable=malfind_kernel_var,
                                    command=lambda: add_to_command("malfind", "-kernel", command_list, os_entry))
@@ -682,6 +751,9 @@ def create_gui():
     # Mbrscan_plugin
     Mbrscan_plugin = Menu(commands_menu, tearoff=0)
     mbrscan_kernel_var = tk.BooleanVar()
+    Mbrscan_plugin.add_checkbutton(label="no flags", variable=mbrscan_kernel_var,
+                                   command=lambda: add_to_command("mbrscan", "", command_list, os_entry))
+    mbrscan_kernel_var = tk.BooleanVar()
     Mbrscan_plugin.add_checkbutton(label="-kernel", variable=mbrscan_kernel_var,
                                    command=lambda: add_to_command("mbrscan", "-kernel", command_list, os_entry))
     mbrscan_full_var = tk.BooleanVar()
@@ -691,6 +763,9 @@ def create_gui():
 
     # Memmap_plugin
     Memmap_plugin = Menu(commands_menu, tearoff=0)
+    memmap_kernel_var = tk.BooleanVar()
+    Memmap_plugin.add_checkbutton(label="no flags", variable=memmap_kernel_var,
+                                  command=lambda: add_to_command("memmap", "", command_list, os_entry))
     memmap_kernel_var = tk.BooleanVar()
     Memmap_plugin.add_checkbutton(label="-kernel", variable=memmap_kernel_var,
                                   command=lambda: add_to_command("memmap", "-kernel", command_list, os_entry))
@@ -708,6 +783,9 @@ def create_gui():
     # Mftscan_plugin
     Mftscan_plugin = Menu(commands_menu, tearoff=0)
     mftscan_primary_var = tk.BooleanVar()
+    Mftscan_plugin.add_checkbutton(label="no flags", variable=mftscan_primary_var,
+                                   command=lambda: add_to_command("mftscan", "", command_list, os_entry))
+    mftscan_primary_var = tk.BooleanVar()
     Mftscan_plugin.add_checkbutton(label="-primary", variable=mftscan_primary_var,
                                    command=lambda: add_to_command("mftscan", "-primary", command_list, os_entry))
     mftscan_yarascanner_var = tk.BooleanVar()
@@ -718,6 +796,9 @@ def create_gui():
     # Ads_plugin
     Ads_plugin = Menu(commands_menu, tearoff=0)
     ads_primary_var = tk.BooleanVar()
+    Ads_plugin.add_checkbutton(label="no flags", variable=ads_primary_var,
+                               command=lambda: add_to_command("ads", "", command_list, os_entry))
+    ads_primary_var = tk.BooleanVar()
     Ads_plugin.add_checkbutton(label="-primary", variable=ads_primary_var,
                                command=lambda: add_to_command("ads", "-primary", command_list, os_entry))
     ads_yarascanner_var = tk.BooleanVar()
@@ -727,6 +808,9 @@ def create_gui():
 
     # Modscan_plugin
     Modscan_plugin = Menu(commands_menu, tearoff=0)
+    modscan_kernel_var = tk.BooleanVar()
+    Modscan_plugin.add_checkbutton(label="no flags", variable=modscan_kernel_var,
+                                   command=lambda: add_to_command("modscan", "", command_list, os_entry))
     modscan_kernel_var = tk.BooleanVar()
     Modscan_plugin.add_checkbutton(label="-kernel", variable=modscan_kernel_var,
                                    command=lambda: add_to_command("modscan", "-kernel", command_list, os_entry))
@@ -747,6 +831,9 @@ def create_gui():
     # Modules_plugin
     Modules_plugin = Menu(commands_menu, tearoff=0)
     modules_kernel_var = tk.BooleanVar()
+    Modules_plugin.add_checkbutton(label="no flags", variable=modules_kernel_var,
+                                   command=lambda: add_to_command("modules", "", command_list, os_entry))
+    modules_kernel_var = tk.BooleanVar()
     Modules_plugin.add_checkbutton(label="-kernel", variable=modules_kernel_var,
                                    command=lambda: add_to_command("modules", "-kernel", command_list, os_entry))
     modules_pslist_var = tk.BooleanVar()
@@ -766,6 +853,9 @@ def create_gui():
     # Mutantscan_plugin
     Mutantscan_plugin = Menu(commands_menu, tearoff=0)
     mutantscan_kernel_var = tk.BooleanVar()
+    Mutantscan_plugin.add_checkbutton(label="no flags", variable=mutantscan_kernel_var,
+                                      command=lambda: add_to_command("mutantscan", "", command_list, os_entry))
+    mutantscan_kernel_var = tk.BooleanVar()
     Mutantscan_plugin.add_checkbutton(label="-kernel", variable=mutantscan_kernel_var,
                                       command=lambda: add_to_command("mutantscan", "-kernel", command_list, os_entry))
     mutantscan_poolscanner_var = tk.BooleanVar()
@@ -776,6 +866,9 @@ def create_gui():
 
     # Netscan_plugin
     Netscan_plugin = Menu(commands_menu, tearoff=0)
+    netscan_kernel_var = tk.BooleanVar()
+    Netscan_plugin.add_checkbutton(label="no flags", variable=netscan_kernel_var,
+                                   command=lambda: add_to_command("netscan", "", command_list, os_entry))
     netscan_kernel_var = tk.BooleanVar()
     Netscan_plugin.add_checkbutton(label="-kernel", variable=netscan_kernel_var,
                                    command=lambda: add_to_command("netscan", "-kernel", command_list, os_entry))
@@ -796,6 +889,9 @@ def create_gui():
 
     # Netstat_plugin
     Netstat_plugin = Menu(commands_menu, tearoff=0)
+    netstat_kernel_var = tk.BooleanVar()
+    Netstat_plugin.add_checkbutton(label="no flags", variable=netstat_kernel_var,
+                                   command=lambda: add_to_command("netstat", "", command_list, os_entry))
     netstat_kernel_var = tk.BooleanVar()
     Netstat_plugin.add_checkbutton(label="-kernel", variable=netstat_kernel_var,
                                    command=lambda: add_to_command("netstat", "-kernel", command_list, os_entry))
@@ -823,6 +919,9 @@ def create_gui():
     # Poolscanner_plugin
     Poolscanner_plugin = Menu(commands_menu, tearoff=0)
     poolscanner_kernel_var = tk.BooleanVar()
+    Poolscanner_plugin.add_checkbutton(label="no flags", variable=poolscanner_kernel_var,
+                                       command=lambda: add_to_command("poolscanner", "", command_list, os_entry))
+    poolscanner_kernel_var = tk.BooleanVar()
     Poolscanner_plugin.add_checkbutton(label="-kernel", variable=poolscanner_kernel_var,
                                        command=lambda: add_to_command("poolscanner", "-kernel", command_list, os_entry))
     poolscanner_handles_var = tk.BooleanVar()
@@ -833,6 +932,9 @@ def create_gui():
 
     # Privs_plugin
     Privs_plugin = Menu(commands_menu, tearoff=0)
+    privs_kernel_var = tk.BooleanVar()
+    Privs_plugin.add_checkbutton(label="no flags", variable=privs_kernel_var,
+                                 command=lambda: add_to_command("privs", "", command_list, os_entry))
     privs_kernel_var = tk.BooleanVar()
     Privs_plugin.add_checkbutton(label="-kernel", variable=privs_kernel_var,
                                  command=lambda: add_to_command("privs", "-kernel", command_list, os_entry))
@@ -846,6 +948,9 @@ def create_gui():
 
     # Pslist_plugin
     Pslist_plugin = Menu(commands_menu, tearoff=0)
+    pslist_kernel_var = tk.BooleanVar()
+    Pslist_plugin.add_checkbutton(label="no flags", variable=pslist_kernel_var,
+                                  command=lambda: add_to_command("pslist", "", command_list, os_entry))
     pslist_kernel_var = tk.BooleanVar()
     Pslist_plugin.add_checkbutton(label="-kernel", variable=pslist_kernel_var,
                                   command=lambda: add_to_command("pslist", "-kernel", command_list, os_entry))
@@ -862,6 +967,9 @@ def create_gui():
 
     # Psscan_plugin
     Psscan_plugin = Menu(commands_menu, tearoff=0)
+    psscan_kernel_var = tk.BooleanVar()
+    Psscan_plugin.add_checkbutton(label="no flags", variable=psscan_kernel_var,
+                                  command=lambda: add_to_command("psscan", "", command_list, os_entry))
     psscan_kernel_var = tk.BooleanVar()
     Psscan_plugin.add_checkbutton(label="-kernel", variable=psscan_kernel_var,
                                   command=lambda: add_to_command("psscan", "-kernel", command_list, os_entry))
@@ -885,6 +993,9 @@ def create_gui():
     # Pstree_plugin
     Pstree_plugin = Menu(commands_menu, tearoff=0)
     pstree_kernel_var = tk.BooleanVar()
+    Pstree_plugin.add_checkbutton(label="no flags", variable=pstree_kernel_var,
+                                  command=lambda: add_to_command("pstree", "", command_list, os_entry))
+    pstree_kernel_var = tk.BooleanVar()
     Pstree_plugin.add_checkbutton(label="-kernel", variable=pstree_kernel_var,
                                   command=lambda: add_to_command("pstree", "-kernel", command_list, os_entry))
     pstree_physical_var = tk.BooleanVar()
@@ -901,6 +1012,9 @@ def create_gui():
     # Sessions_plugin
     Sessions_plugin = Menu(commands_menu, tearoff=0)
     sessions_kernel_var = tk.BooleanVar()
+    Sessions_plugin.add_checkbutton(label="no flags", variable=sessions_kernel_var,
+                                    command=lambda: add_to_command("sessions", "", command_list, os_entry))
+    sessions_kernel_var = tk.BooleanVar()
     Sessions_plugin.add_checkbutton(label="-kernel", variable=sessions_kernel_var,
                                     command=lambda: add_to_command("sessions", "-kernel", command_list, os_entry))
     sessions_pslist_var = tk.BooleanVar()
@@ -913,6 +1027,10 @@ def create_gui():
 
     # Skeleton_key_check_plugin
     Skeleton_key_check_plugin = Menu(commands_menu, tearoff=0)
+    skeleton_key_check_kernel_var = tk.BooleanVar()
+    Skeleton_key_check_plugin.add_checkbutton(label="no flags", variable=skeleton_key_check_kernel_var,
+                                              command=lambda: add_to_command("skeleton_key_check", "",
+                                                                             command_list, os_entry))
     skeleton_key_check_kernel_var = tk.BooleanVar()
     Skeleton_key_check_plugin.add_checkbutton(label="-kernel", variable=skeleton_key_check_kernel_var,
                                               command=lambda: add_to_command("skeleton_key_check", "-kernel",
@@ -934,6 +1052,9 @@ def create_gui():
     # Ssdt_plugin
     Ssdt_plugin = Menu(commands_menu, tearoff=0)
     ssdt_kernel_var = tk.BooleanVar()
+    Ssdt_plugin.add_checkbutton(label="no flags", variable=ssdt_kernel_var,
+                                command=lambda: add_to_command("ssdt", "", command_list, os_entry))
+    ssdt_kernel_var = tk.BooleanVar()
     Ssdt_plugin.add_checkbutton(label="-kernel", variable=ssdt_kernel_var,
                                 command=lambda: add_to_command("ssdt", "-kernel", command_list, os_entry))
     ssdt_modules_var = tk.BooleanVar()
@@ -943,6 +1064,9 @@ def create_gui():
 
     # Strings_plugin
     Strings_plugin = Menu(commands_menu, tearoff=0)
+    strings_kernel_var = tk.BooleanVar()
+    Strings_plugin.add_checkbutton(label="no flags", variable=strings_kernel_var,
+                                   command=lambda: add_to_command("strings", "", command_list, os_entry))
     strings_kernel_var = tk.BooleanVar()
     Strings_plugin.add_checkbutton(label="-kernel", variable=strings_kernel_var,
                                    command=lambda: add_to_command("strings", "-kernel", command_list, os_entry))
@@ -959,6 +1083,9 @@ def create_gui():
 
     # Svcscan_plugin
     Svcscan_plugin = Menu(commands_menu, tearoff=0)
+    svcscan_kernel_var = tk.BooleanVar()
+    Svcscan_plugin.add_checkbutton(label="no flags", variable=svcscan_kernel_var,
+                                   command=lambda: add_to_command("svcscan", "", command_list, os_entry))
     svcscan_kernel_var = tk.BooleanVar()
     Svcscan_plugin.add_checkbutton(label="-kernel", variable=svcscan_kernel_var,
                                    command=lambda: add_to_command("svcscan", "-kernel", command_list, os_entry))
@@ -979,12 +1106,18 @@ def create_gui():
     # Symlinkscan_plugin
     Symlinkscan_plugin = Menu(commands_menu, tearoff=0)
     symlinkscan_kernel_var = tk.BooleanVar()
+    Symlinkscan_plugin.add_checkbutton(label="no flags", variable=symlinkscan_kernel_var,
+                                       command=lambda: add_to_command("symlinkscan", "", command_list, os_entry))
+    symlinkscan_kernel_var = tk.BooleanVar()
     Symlinkscan_plugin.add_checkbutton(label="-kernel", variable=symlinkscan_kernel_var,
                                        command=lambda: add_to_command("symlinkscan", "-kernel", command_list, os_entry))
     commands_menu.add_cascade(label="Symlinkscan", menu=Symlinkscan_plugin)
 
     # Thrdscan_plugin
     Thrdscan_plugin = Menu(commands_menu, tearoff=0)
+    thrdscan_kernel_var = tk.BooleanVar()
+    Thrdscan_plugin.add_checkbutton(label="no flags", variable=thrdscan_kernel_var,
+                                    command=lambda: add_to_command("thrdscan", "", command_list, os_entry))
     thrdscan_kernel_var = tk.BooleanVar()
     Thrdscan_plugin.add_checkbutton(label="-kernel", variable=thrdscan_kernel_var,
                                     command=lambda: add_to_command("thrdscan", "-kernel", command_list, os_entry))
@@ -996,6 +1129,9 @@ def create_gui():
     # Passphrase_plugin
     Passphrase_plugin = Menu(commands_menu, tearoff=0)
     passphrase_modules_var = tk.BooleanVar()
+    Passphrase_plugin.add_checkbutton(label="no flags", variable=passphrase_modules_var,
+                                      command=lambda: add_to_command("passphrase", "", command_list, os_entry))
+    passphrase_modules_var = tk.BooleanVar()
     Passphrase_plugin.add_checkbutton(label="-modules", variable=passphrase_modules_var,
                                       command=lambda: add_to_command("passphrase", "-modules", command_list, os_entry))
     passphrase_min_length_var = tk.BooleanVar()
@@ -1006,6 +1142,9 @@ def create_gui():
 
     # Vadinfo_plugin
     Vadinfo_plugin = Menu(commands_menu, tearoff=0)
+    vadinfo_kernel_var = tk.BooleanVar()
+    Vadinfo_plugin.add_checkbutton(label="no flags", variable=vadinfo_kernel_var,
+                                   command=lambda: add_to_command("vadinfo", "", command_list, os_entry))
     vadinfo_kernel_var = tk.BooleanVar()
     Vadinfo_plugin.add_checkbutton(label="-kernel", variable=vadinfo_kernel_var,
                                    command=lambda: add_to_command("vadinfo", "-kernel", command_list, os_entry))
@@ -1029,6 +1168,9 @@ def create_gui():
     # Vadwalk_plugin
     Vadwalk_plugin = Menu(commands_menu, tearoff=0)
     vadwalk_kernel_var = tk.BooleanVar()
+    Vadwalk_plugin.add_checkbutton(label="no flags", variable=vadwalk_kernel_var,
+                                   command=lambda: add_to_command("vadwalk", "", command_list, os_entry))
+    vadwalk_kernel_var = tk.BooleanVar()
     Vadwalk_plugin.add_checkbutton(label="-kernel", variable=vadwalk_kernel_var,
                                    command=lambda: add_to_command("vadwalk", "-kernel", command_list, os_entry))
     vadwalk_pslist_var = tk.BooleanVar()
@@ -1049,6 +1191,9 @@ def create_gui():
     # Verinfo_plugin
     Verinfo_plugin = Menu(commands_menu, tearoff=0)
     verinfo_kernel_var = tk.BooleanVar()
+    Verinfo_plugin.add_checkbutton(label="no flags", variable=verinfo_kernel_var,
+                                   command=lambda: add_to_command("verinfo", "", command_list, os_entry))
+    verinfo_kernel_var = tk.BooleanVar()
     Verinfo_plugin.add_checkbutton(label="-kernel", variable=verinfo_kernel_var,
                                    command=lambda: add_to_command("verinfo", "-kernel", command_list, os_entry))
     verinfo_pslist_var = tk.BooleanVar()
@@ -1068,12 +1213,18 @@ def create_gui():
     # Virtmap_plugin
     Virtmap_plugin = Menu(commands_menu, tearoff=0)
     virtmap_kernel_var = tk.BooleanVar()
+    Virtmap_plugin.add_checkbutton(label="no flags", variable=virtmap_kernel_var,
+                                   command=lambda: add_to_command("virtmap", "", command_list, os_entry))
+    virtmap_kernel_var = tk.BooleanVar()
     Virtmap_plugin.add_checkbutton(label="-kernel", variable=virtmap_kernel_var,
                                    command=lambda: add_to_command("virtmap", "-kernel", command_list, os_entry))
     commands_menu.add_cascade(label="Virtmap", menu=Virtmap_plugin)
 
     # Hivelist_plugin
     Hivelist_plugin = Menu(commands_menu, tearoff=0)
+    hivelist_kernel_var = tk.BooleanVar()
+    Hivelist_plugin.add_checkbutton(label="no flags", variable=hivelist_kernel_var,
+                                    command=lambda: add_to_command("hivelist", "", command_list, os_entry))
     hivelist_kernel_var = tk.BooleanVar()
     Hivelist_plugin.add_checkbutton(label="-kernel", variable=hivelist_kernel_var,
                                     command=lambda: add_to_command("hivelist", "-kernel", command_list, os_entry))
@@ -1091,6 +1242,9 @@ def create_gui():
     # Hivescan_plugin
     Hivescan_plugin = Menu(commands_menu, tearoff=0)
     hivescan_kernel_var = tk.BooleanVar()
+    Hivescan_plugin.add_checkbutton(label="no flags", variable=hivescan_kernel_var,
+                                    command=lambda: add_to_command("hivescan", "", command_list, os_entry))
+    hivescan_kernel_var = tk.BooleanVar()
     Hivescan_plugin.add_checkbutton(label="-kernel", variable=hivescan_kernel_var,
                                     command=lambda: add_to_command("hivescan", "-kernel", command_list, os_entry))
     hivescan_poolscanner_var = tk.BooleanVar()
@@ -1103,6 +1257,9 @@ def create_gui():
 
     # Printkey_plugin
     Printkey_plugin = Menu(commands_menu, tearoff=0)
+    printkey_kernel_var = tk.BooleanVar()
+    Printkey_plugin.add_checkbutton(label="no flags", variable=printkey_kernel_var,
+                                    command=lambda: add_to_command("printkey", "", command_list, os_entry))
     printkey_kernel_var = tk.BooleanVar()
     Printkey_plugin.add_checkbutton(label="-kernel", variable=printkey_kernel_var,
                                     command=lambda: add_to_command("printkey", "-kernel", command_list, os_entry))
@@ -1122,6 +1279,9 @@ def create_gui():
 
     # Userassist_plugin
     Userassist_plugin = Menu(commands_menu, tearoff=0)
+    userassist_kernel_var = tk.BooleanVar()
+    Userassist_plugin.add_checkbutton(label="no flags", variable=userassist_kernel_var,
+                                      command=lambda: add_to_command("userassist", "", command_list, os_entry))
     userassist_kernel_var = tk.BooleanVar()
     Userassist_plugin.add_checkbutton(label="-kernel", variable=userassist_kernel_var,
                                       command=lambda: add_to_command("userassist", "-kernel", command_list, os_entry))
