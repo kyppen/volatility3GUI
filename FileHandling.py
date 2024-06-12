@@ -40,9 +40,6 @@ def AppendCommandAndOutput(command_list, output):
     ts = datetime.datetime.now().timestamp()
 
     filename = command_list[-1]
-    print("filename XD")
-    print(filename)
-    filename = "XDXDXDXD"
     command_string = " ".join(command_list)
     filepath = os.path.join('history', f'{filename}{ts}')
     f = open(filepath, "x")
