@@ -29,6 +29,15 @@ def get_system():
     return platform.system()
 
 
+# prompts the user for path to directory to store output
+def dump_path():
+    file_path = filedialog.askdirectory()
+    if file_path:
+        return file_path
+    else:
+        return None
+
+
 # uses system specific file browser
 def browse_files(command_list, path_entry):
     file_path = filedialog.askopenfilename()
@@ -99,9 +108,15 @@ def run_command_capture_output(cmd_list):
         return e.stderr
 
 
+def clear_output(output_text):
+    output_text.text.delete(1.0, tk.END)
+    output_text.update_line_numbers()
+
+
 # calls on run_command_capture_output and writes return value to mid_text_field
-def run_command(command_list, output_text, prevCommandList, mid_text_field):
+def run_command(command_list, output_text, prevCommandList):
     print("run_command()")
+    clear_output(output_text)
 
     # command_str_list = command_list.to_string().split(" ")
     output = run_command_capture_output(command_list)
@@ -109,9 +124,6 @@ def run_command(command_list, output_text, prevCommandList, mid_text_field):
     output_text.text.delete(1.0, tk.END)
     output_text.text.insert(tk.END, output)
     output_text.update_line_numbers()
-    # mid_text_field.delete(0, tk.END)
-    # mid_text_field.insert(tk.END, output)
-    FileHandling.AppendCommandAndOutput(command_list, output)
     FileHandling.update_history(prevCommandList)
 
 
@@ -124,9 +136,11 @@ def add_to_command(plugin, flag, cmd_list, os_entry):
             add_userinput_to_command(flag, cmd_list)
     else:
         cmd_list.append(os_name + '.' + plugin)
+
         if flag != "":
             cmd_list.append(flag)
             add_userinput_to_command(flag, cmd_list)
+
     return cmd_list
 
 
@@ -148,13 +162,20 @@ def sanitize_input(input):
 
 # checks if a flag takes an input and then prompts the user for it
 def check_if_flag_takes_input(flag):
-    flags_with_input = ['--pid', '--offset']
+    flags_with_input = ['--pid', '--offset', '--dump']
     if flag in flags_with_input:
+        if flag == '--dump':
+            print("found --dump")
+            path = dump_path()
+            return_val = ['-o', path]
+            return return_val
+
         root = tk.Tk()
         root.withdraw()
         user_input = simpledialog.askstring("Input Required", f"Please enter a value for {flag}:")
         root.destroy()
         return sanitize_input(user_input)
+
     return None
 
 
@@ -173,8 +194,14 @@ def add_userinput_to_command(flag, cmd_list):
     if flag in cmd_list:
         user_input = check_if_flag_takes_input(flag)
         if user_input is not None:
-            flag_index = cmd_list.index(flag)
-            cmd_list.insert(flag_index + 1, user_input)
+            if type(user_input) is list:
+                flag_index = cmd_list.index('-f')
+                cmd_list.insert(flag_index + 2, user_input[0])
+                cmd_list.insert(flag_index + 3, user_input[1])
+            else:
+                flag_index = cmd_list.index(flag)
+                cmd_list.insert(flag_index + 1, user_input)
+
         else:
             print(f"flag '{flag}' does not take input")
     else:
@@ -184,17 +211,17 @@ def add_userinput_to_command(flag, cmd_list):
 
 
 # resets the command list
-def reset_command_list(cmd_list):
+def reset_command_list(cmd_list, file_path):
     cmd_list.clear()
     if get_system() == "Windows":
         cmd_list.append("python")
         cmd_list.append("/home/bolle/Documents/volatility3/vol.py")
-    if get_system() == "Linux":
-        print("Linux detected")
+    else:
         cmd_list.append("python3")
-        cmd_list.append("/home/fam/volatility3-develop/vol.py")
+        cmd_list.append("/home/bolle/Documents/volatility3/vol.py")
 
     cmd_list.append("-f")
+    cmd_list.append(file_path)
     return cmd_list
 
 
@@ -207,7 +234,9 @@ def update_cmd(command_list, mid_text_field):
 
 # calls on update_cmd and reset_command_list
 def reset_and_update(cmd_list, mid_text_field):
-    reset_command_list(cmd_list)
+    path_index = cmd_list.index('-f')
+    file_path = cmd_list[path_index + 1]
+    reset_command_list(cmd_list, file_path)
     update_cmd(cmd_list, mid_text_field)
     return cmd_list
 
@@ -216,7 +245,7 @@ def reset_and_update(cmd_list, mid_text_field):
 def create_gui():
     current_command = cmd.command()
     command_list = []
-    command_list = reset_command_list(command_list)
+    command_list = reset_command_list(command_list, "")
 
     root = tk.Tk()
     root.title("Volatility 3")
