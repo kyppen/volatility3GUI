@@ -49,6 +49,9 @@ def AppendCommandAndOutput(command_list, output):
 def getHistoryFromFile():
     path = "history"
     HistoryList = []
+    historypath = os.path.join(os.path.curdir, 'history')
+    if not os.path.exists(historypath):
+        os.makedirs(historypath)
 
     for filename in os.listdir(path):
         Data = commandData.commandData()
