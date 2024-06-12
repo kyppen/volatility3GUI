@@ -51,28 +51,10 @@ def browse_files(command_list, path_entry):
 
 def get_selected_command(listbox, output_text, mid_text_field,prevCommandList):
     for i in listbox.curselection():
-        print("get_selected_command()")
-        #print(listbox.get(i))
-        #print(i)
-        print("History[i].output")
-        #print(History[i].get_command())
-        print("History[i].output")
-        #print(History[i].output)
         History = FileHandling.update_history(prevCommandList)
         update_selected_from_history(listbox.get(i), output_text,mid_text_field, History[i])
-        #mid_text_field.delete(0, tk.END)
-        #mid_text_field.insert(0, History[i].get_command())
-
-        #output_text.text.delete("1.0", tk.END)
-        #output_text.text.insert("1.0", History[i].get_output())
-        #output_text.update_line_numbers()
-        #output_text.text.delete(1.0, tk.END)
-        #output_text.text.insert(1.0, History[i].output)
-
     #Takes a object and displays them in the history window
 def update_selected_from_history(command, output_text,mid_text_field, cmd_and_output):
-    #print(cmd_and_output.get_command_formatted())
-    #print(cmd_and_output.get_command())
     command.strip()
     output_text.text.delete(1.0, tk.END)
     output_text.text.insert(1.0, cmd_and_output.get_output())
@@ -305,6 +287,8 @@ def create_gui():
     root.grid_columnconfigure(0, weight=1)
     root.grid_columnconfigure(1, weight=2)
     root.grid_columnconfigure(2, weight=1)
+    root.winfo_height()
+    root.winfo_width()
 
     frame_left = ttk.Frame(root, relief=tk.RAISED, borderwidth=1)
     frame_center = ttk.Frame(root, relief=tk.RAISED, borderwidth=1)
@@ -327,8 +311,9 @@ def create_gui():
     frame_right.grid_columnconfigure(0, weight=1)
     frame_right.grid_columnconfigure(1, weight=0)
 
+
     frame_left.config(width=200, height=100)
-    frame_center.config(width=200, height=100)
+    frame_center.config(width=50, height=100)
     frame_right.config(width=200, height=100)
     frame_mid.config(height=50)
 
@@ -351,11 +336,12 @@ def create_gui():
     browse_button = ttk.Button(path_frame, text="Browse", command=lambda: browse_files(command_list, path_entry))
     browse_button.grid(row=0, column=2, padx=1, pady=0)
     clear_button = ttk.Button(path_frame, text="Clear", command=lambda: clear_path(path_entry))
-    clear_button.grid(row=0, column=3, padx=1, pady=0)
+    clear_button.grid(row=1, column=2, padx=1, pady=0)
 
     cmd_var = tk.StringVar()
     flag_var = tk.StringVar()
     commands_menu = Menu(frame_center, tearoff=0)
+
 
     # Bigpools_plugin
     Bigpools_plugin = Menu(commands_menu, tearoff=0)
@@ -1320,7 +1306,7 @@ def create_gui():
     text_with_line_numbers.pack(expand=True, fill='both')
 
     prevCommandList.config(yscrollcommand=command_scrollbar.set)
-    History = FileHandling.update_history(prevCommandList)
+    FileHandling.update_history(prevCommandList)
 
 
 
