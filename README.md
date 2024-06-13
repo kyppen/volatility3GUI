@@ -44,7 +44,8 @@ more info in volatility3/README.MD
 1. After starting the program, choose the OS relevant to the memory dump you wish to work on.
 2. Choose memory dump file with the `Browse` button.
 3. Choose `Psscan` with `no flags` in the Commands menu located in the upper center of the GUI.
-4. Click the `Run` button located in the center bar of the GUI.
-5. Wait for the program to complete; the result will be displayed in the text field on the lower half of the display.
-6. The result of the scan can be saved by clicking the `File` menu and choosing `Save as` in the dropdown menu.
+4. Click the `update` button to generate the command.
+5. Click the `run` button to execute
+6. Wait for the program to complete; the result will be displayed in the text field on the lower half of the display.
+7. the result of the scan can be saved by clicking the `File` menu and choosing `Save as` in the dropdown menu.
 
