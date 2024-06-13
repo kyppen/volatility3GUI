@@ -237,7 +237,7 @@ def reset_and_update(cmd_list, mid_text_field):
 
 
 
-
+    #generates random ui with colors
 def generate_ui_color(list, text_with_line_numbers, prevCommandList):
     text_with_line_numbers.set_ui_color()
     log_color = utils.generate_hex_color()
@@ -246,10 +246,10 @@ def generate_ui_color(list, text_with_line_numbers, prevCommandList):
 
     prevCommandList.config(fg=utils.yiq_contrast_color(log_color))
     for arg in list:
-            #color_num = random.randrange(0, 2 ** 24)
             hex_color = utils.generate_hex_color()
-            #std_color = "#" + hex_color[2:]
             arg.config(background=hex_color)
+
+    #changes to white ui
 def white_ui(list, text_with_line_numbers, prevCommandList):
     prevCommandList.config(background="#FFFFFF")
     prevCommandList.config(fg='black')
@@ -264,9 +264,6 @@ def dark_ui(list, text_with_line_numbers, prevCommandList):
     for arg in list:
         arg.config(background="#3e3e42")
 
-def change_font_size(text_with_line_numbers, size):
-    text_with_line_numbers.set_ui_font_size(size)
-
 
 # builds the GUI
 def create_gui():
@@ -278,10 +275,6 @@ def create_gui():
     root.title("Volatility 3")
     root['bg'] = 'black'
 
-
-
-    #color1 = generate_ui_color()
-    #color2 = generate_ui_color()
 
     menubar_frame = tk.Frame(root, height=30)
     menubar_frame.grid(row=0, column=0, columnspan=3, sticky='ew')
@@ -323,13 +316,6 @@ def create_gui():
                         command=lambda: generate_ui_color([frame_left,frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container, menubar_frame, path_frame, menu_bar], text_with_line_numbers, prevCommandList))
 
     menu_bar.add_cascade(label="UI", menu=ui_menu)
-    font_menu = Menu(menu_bar, tearoff=0)
-
-    font_menu.add_command(label="Size: 5", command=lambda: change_font_size(text_with_line_numbers, 5))
-    font_menu.add_command(label="Size: 6", command=lambda: change_font_size(text_with_line_numbers, 6))
-    font_menu.add_command(label="Size: 7", command=lambda: change_font_size(text_with_line_numbers, 7))
-    font_menu.add_command(label="Size: 8", command=lambda: change_font_size(text_with_line_numbers, 8))
-    menu_bar.add_cascade(label="Font", menu=font_menu)
     root.config(menu=menu_bar)
     root.minsize(1200, 400)
 

@@ -1,13 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
-import random
 import utils
 
 class TextWithLineNumbers(tk.Frame):
     def __init__(self, master, *args, **kwargs):
         super().__init__(master, *args, **kwargs)
 
-        self.text = tk.Text(self, wrap='word', height=30, width=100, undo=True)
+        self.text = tk.Text(self, wrap='word', height=30, width=1, undo=True)
         self.line_numbers_left = tk.Text(self, width=4, padx=3, takefocus=0, border=0,
                                     state='disabled')
         self.line_numbers_right = tk.Text(self, width=4, padx=3, takefocus=0, border=0,
@@ -72,27 +71,15 @@ class TextWithLineNumbers(tk.Frame):
         self.line_numbers_left.config(background=hex_color2, fg=contrast_color2)
 
     def set_ui_color_white(self):
-        self.text.config(fg="#000000", background="#d0d3d4")
-        self.line_numbers_right.config(fg="#000000", background="#d0d3d4")
-        self.line_numbers_left.config(fg="#000000", background="#d0d3d4")
+        self.text.config(fg="#000000", background="#fff")
+        self.line_numbers_right.config(fg="#000000", background="#d3d3d3")
+        self.line_numbers_left.config(fg="#000000", background="#d3d3d3")
 
     def set_ui_dark_color(self):
         self.text.config(fg="#FFFFFF", background="#3e3e42")
         self.line_numbers_right.config(fg="#FFFFFF", background="#3e3e42")
         self.line_numbers_left.config(fg="#FFFFFF", background="#3e3e42")
 
-    def set_ui_font_size(self, size):
-        current_font = self.text.cget('font')
-        new_font = (current_font.split()[0], size)
-        self.text.config(font=new_font)
-        self.line_numbers_right.config(font=new_font)
-
-        # Recalculate the width in characters
-        char_width = self.text.tk.call("font", "measure", new_font, "0")
-        width_px = self.text.winfo_width()
-        new_width_chars = width_px // char_width
-
-        self.text.config(width=new_width_chars)
 
     def on_text_scroll(self, *args):
         self.sync_scroll()
