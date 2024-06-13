@@ -238,23 +238,34 @@ def reset_and_update(cmd_list, mid_text_field):
 
 
 
-def generate_ui_color(list, text_with_line_numbers):
+def generate_ui_color(list, text_with_line_numbers, prevCommandList):
     text_with_line_numbers.set_ui_color()
+    log_color = utils.generate_hex_color()
+
+    prevCommandList.config(background=log_color)
+
+    prevCommandList.config(fg=utils.yiq_contrast_color(log_color))
     for arg in list:
             #color_num = random.randrange(0, 2 ** 24)
             hex_color = utils.generate_hex_color()
             #std_color = "#" + hex_color[2:]
             arg.config(background=hex_color)
-def white_ui(list, text_with_line_numbers):
+def white_ui(list, text_with_line_numbers, prevCommandList):
+    prevCommandList.config(background="#FFFFFF")
+    prevCommandList.config(fg='black')
     print("white_ui")
     text_with_line_numbers.set_ui_color_white()
     for arg in list:
         arg.config(background="#d0d3d4")
-def dark_ui(list, text_with_line_numbers):
+def dark_ui(list, text_with_line_numbers, prevCommandList):
+    prevCommandList.config(background="black")
+    prevCommandList.config(fg='#FFFFFF')
     text_with_line_numbers.set_ui_dark_color()
     for arg in list:
         arg.config(background="#3e3e42")
 
+def change_font_size(text_with_line_numbers, size):
+    text_with_line_numbers.set_ui_font_size(size)
 
 
 # builds the GUI
@@ -304,14 +315,21 @@ def create_gui():
     menu_bar.add_cascade(label="OS", menu=os_menu)
 
     ui_menu = Menu(menu_bar, tearoff=0)
-    ui_menu.add_command(label="standard", command=lambda :white_ui([frame_left,frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container, menubar_frame, path_frame, menu_bar], text_with_line_numbers))
+    ui_menu.add_command(label="standard", command=lambda :white_ui([frame_left,frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container, menubar_frame, path_frame, menu_bar], text_with_line_numbers, prevCommandList))
     ui_menu.add_command(label="dark mode", command=lambda: dark_ui(
         [frame_left, frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container,
-         menubar_frame, path_frame, menu_bar], text_with_line_numbers))
+         menubar_frame, path_frame, menu_bar], text_with_line_numbers, prevCommandList))
     ui_menu.add_command(label="random colors",
-                        command=lambda: generate_ui_color([frame_left,frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container, menubar_frame, path_frame, menu_bar], text_with_line_numbers))
-    menu_bar.add_cascade(label="UI", menu=ui_menu)
+                        command=lambda: generate_ui_color([frame_left,frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container, menubar_frame, path_frame, menu_bar], text_with_line_numbers, prevCommandList))
 
+    menu_bar.add_cascade(label="UI", menu=ui_menu)
+    font_menu = Menu(menu_bar, tearoff=0)
+
+    font_menu.add_command(label="Size: 5", command=lambda: change_font_size(text_with_line_numbers, 5))
+    font_menu.add_command(label="Size: 6", command=lambda: change_font_size(text_with_line_numbers, 6))
+    font_menu.add_command(label="Size: 7", command=lambda: change_font_size(text_with_line_numbers, 7))
+    font_menu.add_command(label="Size: 8", command=lambda: change_font_size(text_with_line_numbers, 8))
+    menu_bar.add_cascade(label="Font", menu=font_menu)
     root.config(menu=menu_bar)
     root.minsize(1200, 400)
 
@@ -1332,15 +1350,27 @@ def create_gui():
     prevCommandList.grid(row=0, column=0, sticky='nsew')
 
     command_scrollbar = ttk.Scrollbar(frame_right, orient="vertical", command=prevCommandList.yview)
-    command_scrollbar.grid(row=0, column=1, sticky='ns')
+    command_scrollbar.grid(row=0, column=1, sticky='nsew')
 
-    output_frame = tk.Frame(frame_lower)
-    frame_lower.configure()
-    output_frame.grid(row=0, column=0, columnspan=2, sticky='nsew')
+    # Configure root to allow expansion
     root.grid_rowconfigure(0, weight=1)
     root.grid_columnconfigure(0, weight=1)
+
+    # Create output_frame within frame_lower
+    output_frame = tk.Frame(frame_lower)
+    output_frame.grid(row=0, column=0, columnspan=2, sticky='nsew')
+
+    # Configure frame_lower and output_frame to expand
+    frame_lower.grid_rowconfigure(0, weight=1)
+    frame_lower.grid_columnconfigure(0, weight=1)
+
+    output_frame.grid_rowconfigure(0, weight=1)
+    output_frame.grid_columnconfigure(0, weight=1)
+
+    # Create and pack TextWithLineNumbers in output_frame
     text_with_line_numbers = textBoxNumbers.TextWithLineNumbers(output_frame)
-    text_with_line_numbers.pack(expand=True, fill='both')
+    text_with_line_numbers.grid(row=0, column=0, sticky="nsew")
+
     prevCommandList.config(yscrollcommand=command_scrollbar.set)
     FileHandling.update_history(prevCommandList)
 
@@ -1385,7 +1415,7 @@ def create_gui():
     #sets default color palette
     white_ui(
         [frame_left, frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container,
-         menubar_frame, path_frame, menu_bar], text_with_line_numbers)
+         menubar_frame, path_frame, menu_bar], text_with_line_numbers, prevCommandList)
     root.mainloop()
 
 
