@@ -6,7 +6,6 @@ import subprocess
 import FileHandling
 import intro
 import textBoxNumbers
-import command as cmd
 import re
 import utils
 import searchInFile
@@ -66,8 +65,8 @@ def update_selected_from_history(command, output_text,mid_text_field, cmd_and_ou
 
 
 
-def set_os(os_name, os_entry, current_command):
-    current_command.set_os(os_name)
+def set_os(os_name, os_entry):
+
     #print(current_command.os)
     os_entry.delete(0, tk.END)
     os_entry.insert(0, os_name)
@@ -268,7 +267,6 @@ def dark_ui(list, text_with_line_numbers, prevCommandList):
 # builds the GUI
 def create_gui():
     intro.show_welcome_window()
-    current_command = cmd.command()
     command_list = []
     command_list = reset_command_list(command_list, "")
     root = tk.Tk()
@@ -302,9 +300,9 @@ def create_gui():
     menu_bar.add_cascade(label="Help", menu=help_menu)
 
     os_menu = Menu(menu_bar, tearoff=0)
-    os_menu.add_command(label="Windows", command=lambda: set_os("windows", os_entry, current_command))
-    os_menu.add_command(label="MacOS", command=lambda: set_os("MacOs", os_entry, current_command))
-    os_menu.add_command(label="Linux", command=lambda: set_os("linux", os_entry, current_command))
+    os_menu.add_command(label="Windows", command=lambda: set_os("windows", os_entry))
+    os_menu.add_command(label="MacOS", command=lambda: set_os("MacOs", os_entry))
+    os_menu.add_command(label="Linux", command=lambda: set_os("linux", os_entry))
     menu_bar.add_cascade(label="OS", menu=os_menu)
 
     ui_menu = Menu(menu_bar, tearoff=0)
