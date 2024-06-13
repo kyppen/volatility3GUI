@@ -44,4 +44,3 @@ more info in volatility3/README.MD
 5. Wait for the program to complete; the result will be displayed in the text field on the lower half of the display.
 6. The result of the scan can be saved by clicking the `File` menu and choosing `Save as` in the dropdown menu.
 
-

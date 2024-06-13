@@ -263,6 +263,30 @@ def dark_ui(list, text_with_line_numbers, prevCommandList):
     for arg in list:
         arg.config(background="#3e3e42")
 
+def show_tutorial():
+    tutorial = tk.Toplevel()
+    tutorial.title("Tutorial")
+    tutorial_img_path = os.path.join(os.path.curdir, 'images', 'intro.png')
+    image = Image.open(tutorial_img_path)
+    photo = ImageTk.PhotoImage(image)
+    label = tk.Label(tutorial, image=photo)
+    label.image = photo
+    label.pack()
+def show_about():
+    about = tk.Toplevel()
+    about.title("Text Display")
+    text_widget = tk.Text(about, wrap='word', width=200, height=10)
+    text_widget.pack(padx=10, pady=10)
+
+    # Insert some text into the text widget
+    about_text = "Made by Cassiopeia \ngithub: https://github.com/kyppen/volatility3GUI \nFor more info consult README.MD or https://github.com/volatilityfoundation/volatility3 \nHotkeys: \nCtrl+f: search in output\nCtrl+O to randomize ui colors"
+    text_widget.insert('1.0', about_text)
+
+    # Make the text widget read-only
+    text_widget.config(state='disabled')
+
+
+
 
 # builds the GUI
 def create_gui():
@@ -283,8 +307,13 @@ def create_gui():
     menubar_container.grid_columnconfigure(0, weight=1)
     menubar_container.grid_columnconfigure(1, weight=0)
 
+
     os_entry = ttk.Entry(menubar_container, width=20)
-    os_entry.grid(row=0, column=1, padx=5, pady=5, sticky='e')
+    os_label = ttk.Label(menubar_container, text="Targeted system:")
+    os_label.grid(row=0,column=1)
+    os_entry.grid(row=0, column=2, padx=5, pady=5, sticky='e')
+
+
 
     menu_bar = Menu(menubar_container)
     file_menu = Menu(menu_bar, tearoff=0)
@@ -295,15 +324,15 @@ def create_gui():
     file_menu.add_command(label="Exit", command=root.quit)
     menu_bar.add_cascade(label="File", menu=file_menu)
     help_menu = Menu(menu_bar, tearoff=0)
-    help_menu.add_command(label="About")
-    help_menu.add_command(label="Tutorial")
+    help_menu.add_command(label="About", command= lambda:show_about())
+    help_menu.add_command(label="Tutorial", command= lambda:show_tutorial())
     menu_bar.add_cascade(label="Help", menu=help_menu)
 
     os_menu = Menu(menu_bar, tearoff=0)
-    os_menu.add_command(label="Windows", command=lambda: set_os("windows", os_entry))
-    os_menu.add_command(label="MacOS", command=lambda: set_os("MacOs", os_entry))
-    os_menu.add_command(label="Linux", command=lambda: set_os("linux", os_entry))
-    menu_bar.add_cascade(label="OS", menu=os_menu)
+    os_menu.add_command(label="windows", command=lambda: set_os("windows", os_entry))
+    os_menu.add_command(label="mac", command=lambda: set_os("mac", os_entry))
+    os_menu.add_command(label="linux", command=lambda: set_os("linux", os_entry))
+    menu_bar.add_cascade(label="Target OS", menu=os_menu)
 
     ui_menu = Menu(menu_bar, tearoff=0)
     ui_menu.add_command(label="standard", command=lambda :white_ui([frame_left,frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container, menubar_frame, path_frame, menu_bar], text_with_line_numbers, prevCommandList))
@@ -366,7 +395,7 @@ def create_gui():
     #path_frame = tk.Frame(frame_left, padding="1 1 1 1", style='TFrame')
     path_frame = tk.Frame(frame_left)
     path_frame.grid(row=0, column=1, padx=1, pady=1, sticky='ew')
-    path_label = ttk.Label(path_frame, text="File Path:")
+    path_label = ttk.Label(path_frame, text="Memory Dump:")
 
     path_label.grid(row=0, column=0, sticky='w')
     path_entry = tk.Entry(path_frame, width=20)
@@ -1396,6 +1425,7 @@ def create_gui():
 
     reset_and_update(command_list, mid_text_field)
     root.bind("<Control-f>", lambda event: search_in_output(text_with_line_numbers))
+    root.bind("<Control-o>", lambda event: generate_ui_color([frame_left,frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container, menubar_frame, path_frame, menu_bar], text_with_line_numbers, prevCommandList))
     #sets default color palette
     white_ui(
         [frame_left, frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container,
