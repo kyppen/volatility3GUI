@@ -10,6 +10,7 @@ import command as cmd
 import re
 import utils
 import searchInFile
+import random
 from PIL import Image, ImageTk
 
 
@@ -235,22 +236,47 @@ def reset_and_update(cmd_list, mid_text_field):
     return cmd_list
 
 
+
+
+def generate_ui_color(list, text_with_line_numbers):
+    text_with_line_numbers.set_ui_color()
+    for arg in list:
+            #color_num = random.randrange(0, 2 ** 24)
+            hex_color = utils.generate_hex_color()
+            #std_color = "#" + hex_color[2:]
+            arg.config(background=hex_color)
+def white_ui(list, text_with_line_numbers):
+    print("white_ui")
+    text_with_line_numbers.set_ui_color_white()
+    for arg in list:
+        arg.config(background="#d0d3d4")
+def dark_ui(list, text_with_line_numbers):
+    text_with_line_numbers.set_ui_dark_color()
+    for arg in list:
+        arg.config(background="#3e3e42")
+
+
+
 # builds the GUI
 def create_gui():
     intro.show_welcome_window()
     current_command = cmd.command()
     command_list = []
     command_list = reset_command_list(command_list, "")
-
     root = tk.Tk()
     root.title("Volatility 3")
     root['bg'] = 'black'
 
-    menubar_frame = ttk.Frame(root, height=30)
+
+
+    #color1 = generate_ui_color()
+    #color2 = generate_ui_color()
+
+    menubar_frame = tk.Frame(root, height=30)
     menubar_frame.grid(row=0, column=0, columnspan=3, sticky='ew')
     menubar_frame.grid_propagate(False)
 
-    menubar_container = ttk.Frame(menubar_frame)
+    menubar_container = tk.Frame(menubar_frame)
     menubar_container.grid(row=0, column=0, sticky='ew')
     menubar_container.grid_columnconfigure(0, weight=1)
     menubar_container.grid_columnconfigure(1, weight=0)
@@ -266,7 +292,6 @@ def create_gui():
     file_menu.add_separator()
     file_menu.add_command(label="Exit", command=root.quit)
     menu_bar.add_cascade(label="File", menu=file_menu)
-
     help_menu = Menu(menu_bar, tearoff=0)
     help_menu.add_command(label="About")
     help_menu.add_command(label="Tutorial")
@@ -277,6 +302,15 @@ def create_gui():
     os_menu.add_command(label="MacOS", command=lambda: set_os("MacOs", os_entry, current_command))
     os_menu.add_command(label="Linux", command=lambda: set_os("linux", os_entry, current_command))
     menu_bar.add_cascade(label="OS", menu=os_menu)
+
+    ui_menu = Menu(menu_bar, tearoff=0)
+    ui_menu.add_command(label="standard", command=lambda :white_ui([frame_left,frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container, menubar_frame, path_frame, menu_bar], text_with_line_numbers))
+    ui_menu.add_command(label="dark mode", command=lambda: dark_ui(
+        [frame_left, frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container,
+         menubar_frame, path_frame, menu_bar], text_with_line_numbers))
+    ui_menu.add_command(label="random colors",
+                        command=lambda: generate_ui_color([frame_left,frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container, menubar_frame, path_frame, menu_bar], text_with_line_numbers))
+    menu_bar.add_cascade(label="UI", menu=ui_menu)
 
     root.config(menu=menu_bar)
     root.minsize(1200, 400)
@@ -291,12 +325,11 @@ def create_gui():
     root.winfo_height()
     root.winfo_width()
 
-    frame_left = ttk.Frame(root, relief=tk.RAISED, borderwidth=1)
-    frame_center = ttk.Frame(root, relief=tk.RAISED, borderwidth=1)
-    frame_right = ttk.Frame(root, relief=tk.RAISED, borderwidth=1)
-    frame_mid = ttk.Frame(root, relief=tk.RAISED, borderwidth=1)
-    frame_lower = ttk.Frame(root, relief=tk.RAISED, borderwidth=1)
-
+    frame_left = tk.Frame(root, relief=tk.RAISED)
+    frame_center = tk.Frame(root, relief=tk.RAISED)
+    frame_right = tk.Frame(root, relief=tk.RAISED)
+    frame_mid = tk.Frame(root, relief=tk.RAISED)
+    frame_lower = tk.Frame(root, relief=tk.RAISED)
     frame_left.grid(row=1, column=0, sticky="nsew")
     frame_center.grid(row=1, column=1, sticky="nsew")
     frame_right.grid(row=1, column=2, sticky="nsew")
@@ -328,16 +361,17 @@ def create_gui():
     root.grid_columnconfigure(1, weight=2)
     root.grid_columnconfigure(2, weight=1)
 
-    path_frame = ttk.Frame(frame_left,padding="1 1 1 1", style='TFrame')
+    #path_frame = tk.Frame(frame_left, padding="1 1 1 1", style='TFrame')
+    path_frame = tk.Frame(frame_left)
     path_frame.grid(row=0, column=1, padx=1, pady=1, sticky='ew')
     path_label = ttk.Label(path_frame, text="File Path:")
 
     path_label.grid(row=0, column=0, sticky='w')
-    path_entry = ttk.Entry(path_frame, width=20)
+    path_entry = tk.Entry(path_frame, width=20)
     path_entry.grid(row=0, column=1, sticky='ew')
-    browse_button = ttk.Button(path_frame, text="Browse", command=lambda: browse_files(command_list, path_entry))
+    browse_button = tk.Button(path_frame, text="Browse", command=lambda: browse_files(command_list, path_entry))
     browse_button.grid(row=0, column=2, padx=1, pady=0)
-    clear_button = ttk.Button(path_frame, text="Clear", command=lambda: clear_path(path_entry))
+    clear_button = tk.Button(path_frame, text="Clear", command=lambda: clear_path(path_entry))
     clear_button.grid(row=1, column=2, padx=1, pady=0)
 
     cmd_var = tk.StringVar()
@@ -1300,13 +1334,13 @@ def create_gui():
     command_scrollbar = ttk.Scrollbar(frame_right, orient="vertical", command=prevCommandList.yview)
     command_scrollbar.grid(row=0, column=1, sticky='ns')
 
-    output_frame = ttk.Frame(frame_lower)
+    output_frame = tk.Frame(frame_lower)
+    frame_lower.configure()
     output_frame.grid(row=0, column=0, columnspan=2, sticky='nsew')
     root.grid_rowconfigure(0, weight=1)
     root.grid_columnconfigure(0, weight=1)
     text_with_line_numbers = textBoxNumbers.TextWithLineNumbers(output_frame)
     text_with_line_numbers.pack(expand=True, fill='both')
-
     prevCommandList.config(yscrollcommand=command_scrollbar.set)
     FileHandling.update_history(prevCommandList)
 
@@ -1322,6 +1356,7 @@ def create_gui():
     mid_text_field = ttk.Entry(frame_mid, width=100)
     mid_text_field.grid(row=0, column=0, padx=5, pady=5, sticky='w')
     mid_text_field.insert(0, "filename.txt / dlllist / --offset")
+
     prevCommandList.bind("<<ListboxSelect>>",
                          get_selected_command(prevCommandList, text_with_line_numbers, mid_text_field, prevCommandList))
 
@@ -1347,6 +1382,10 @@ def create_gui():
 
     reset_and_update(command_list, mid_text_field)
     root.bind("<Control-f>", lambda event: search_in_output(text_with_line_numbers))
+    #sets default color palette
+    white_ui(
+        [frame_left, frame_right, frame_mid, frame_center, frame_lower, browse_button, clear_button, menubar_container,
+         menubar_frame, path_frame, menu_bar], text_with_line_numbers)
     root.mainloop()
 
 
