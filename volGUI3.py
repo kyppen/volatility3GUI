@@ -318,7 +318,7 @@ def create_gui():
     frame_right.grid_columnconfigure(1, weight=0)
 
     frame_left.config(width=200, height=100)
-    frame_center.config(width=200, height=100)
+    frame_center.config(width=50, height=100)
     frame_right.config(width=200, height=100)
     frame_mid.config(height=50)
 
