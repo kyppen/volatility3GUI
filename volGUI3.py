@@ -241,7 +241,6 @@ def generate_ui_color(list, text_with_line_numbers, prevCommandList):
     log_color = utils.generate_hex_color()
 
     prevCommandList.config(background=log_color)
-
     prevCommandList.config(fg=utils.yiq_contrast_color(log_color))
     for arg in list:
             hex_color = utils.generate_hex_color()
