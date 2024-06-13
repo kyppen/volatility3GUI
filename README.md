@@ -13,6 +13,10 @@ necessary skill level required to operate Volatility3.
 <br/>
 <br/>
 
+**external packages**
+required: pillow (PIL)
+
+
 ## Instructions for setting up volatility3 dependencies
 <br/>
 This is not required for volatility3 to function, but if its ignored some plugins might not work correctly.

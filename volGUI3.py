@@ -9,7 +9,6 @@ import textBoxNumbers
 import re
 import utils
 import searchInFile
-import random
 from PIL import Image, ImageTk
 
 
