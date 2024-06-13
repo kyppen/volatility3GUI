@@ -46,11 +46,8 @@ class command:
 
     def to_string(self):
         detectedOs = utils.detect_os()
-        print(self.plugin)
-        print(self.os)
-        print(self.filename)
-        print(self.flag)
-        print(f"detected OS {detectedOs}")
+        #print(self.plugin)
+
         if not all([self.os, self.plugin, self.flag, self.filename]):
             raise ValueError("All components (OS, command, flag, and file path) must be set")
         if(detectedOs == "Windows"):

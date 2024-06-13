@@ -18,8 +18,6 @@ class commandData:
 
 
     def get_command_formatted(self):
-        print("get_command_formatted()")
-        print(self.command)
         filename = ""
         pluginname = ""
         splitCommand = self.command.split(" ")
@@ -32,14 +30,11 @@ class commandData:
                 print(f"word = {fileArg}")
                 file = splitCommand[count+1]
                 filename = file.split("/")[-1]
-                print(filename)
 
             count += 1
             for index, pluginArg in enumerate(splitCommand):
-                if "windows" in pluginArg:
-                    print("windows")
+                if "windows" in pluginArg or "mac" in pluginArg or "linux" in pluginArg:
                     countAtPlugin = index+1
-                    print(pluginArg)
                     pluginname = pluginArg
             flag = splitCommand[countAtPlugin:]
 

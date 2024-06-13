@@ -1,0 +1,121 @@
+command:
+python ./volatility3/vol.py -f /home/fam/Kristiania/2/benji.raw  windows.cmdline
+
+Volatility 3 Framework 2.7.0
+
+PID	Process	Args
+
+4	System	Required memory at 0x20 is not valid (process exited?)
+68	Registry	Required memory at 0x20 is not valid (process exited?)
+300	smss.exe	Required memory at 0x13050b14 is not valid (process exited?)
+396	csrss.exe	Required memory at 0x1aa80c0349c is inaccessible (swapped)
+464	wininit.exe	Required memory at 0x9458791020 is inaccessible (swapped)
+472	csrss.exe	Required memory at 0x1d94ec0349c is inaccessible (swapped)
+520	services.exe	C:\Windows\system32\services.exe
+528	lsass.exe	C:\Windows\system32\lsass.exe
+564	winlogon.exe	winlogon.exe
+688	fontdrvhost.ex	Required memory at 0x23b86c91af8 is inaccessible (swapped)
+696	fontdrvhost.ex	Required memory at 0x1e5302a020 is inaccessible (swapped)
+704	svchost.exe	C:\Windows\system32\svchost.exe -k DcomLaunch -p
+788	svchost.exe	C:\Windows\system32\svchost.exe -k RPCSS -p
+880	dwm.exe	"dwm.exe"
+912	svchost.exe	C:\Windows\system32\svchost.exe -k LocalServiceNoNetwork -p
+944	svchost.exe	C:\Windows\System32\svchost.exe -k LocalServiceNetworkRestricted -p
+964	svchost.exe	C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+356	svchost.exe	C:\Windows\system32\svchost.exe -k LocalService -p
+476	svchost.exe	C:\Windows\system32\svchost.exe -k netsvcs -p
+800	svchost.exe	C:\Windows\System32\svchost.exe -k NetworkService -p
+1152	VBoxService.ex	C:\Windows\System32\VBoxService.exe
+1264	MemCompression	Required memory at 0x20 is not valid (process exited?)
+1424	svchost.exe	C:\Windows\System32\svchost.exe -k LocalServiceNetworkRestricted -p
+1540	svchost.exe	C:\Windows\System32\svchost.exe -k LocalServiceNetworkRestricted -p
+1548	svchost.exe	C:\Windows\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+1608	svchost.exe	Required memory at 0xe39edb9020 is inaccessible (swapped)
+1656	spoolsv.exe	Required memory at 0x5e6020 is inaccessible (swapped)
+1708	svchost.exe	C:\Windows\system32\svchost.exe -k LocalServiceNoNetworkFirewall -p
+1764	svchost.exe	C:\Windows\system32\svchost.exe -k LocalServiceAndNoImpersonation -p
+2008	ruby.exe	Required memory at 0x31d020 is inaccessible (swapped)
+2032	wlms.exe	Required memory at 0x78 is not valid (process exited?)
+2456	dasHost.exe	dashost.exe {28ca0a63-3149-4cbe-bc8684180e076ede}
+1824	svchost.exe	C:\Windows\System32\svchost.exe -k wsappx -p
+3916	svchost.exe	C:\Windows\system32\svchost.exe -k appmodel -p
+1104	sihost.exe	sihost.exe
+2984	svchost.exe	C:\Windows\system32\svchost.exe -k UnistackSvcGroup
+3052	taskhostw.exe	taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+3588	ctfmon.exe	"ctfmon.exe"
+3432	userinit.exe	Required memory at 0x7a8f4bc020 is not valid (process exited?)
+4104	explorer.exe	C:\Windows\Explorer.EXE
+4256	svchost.exe	C:\Windows\system32\svchost.exe -k ClipboardSvcGroup -p
+4608	ShellExperienc	Required memory at 0x9e591ca020 is inaccessible (swapped)
+4792	SearchUI.exe	Required memory at 0x10ed8ce020 is inaccessible (swapped)
+4972	RuntimeBroker.	C:\Windows\System32\RuntimeBroker.exe -Embedding
+5080	ApplicationFra	C:\Windows\system32\ApplicationFrameHost.exe -Embedding
+5112	MicrosoftEdge.	Required memory at 0x1f4bdd0020 is not valid (process exited?)
+4412	svchost.exe	C:\Windows\System32\svchost.exe -k LocalServiceNetworkRestricted
+4300	RuntimeBroker.	C:\Windows\System32\RuntimeBroker.exe -Embedding
+5620	RuntimeBroker.	C:\Windows\System32\RuntimeBroker.exe -Embedding
+5700	SearchIndexer.	C:\Windows\system32\SearchIndexer.exe /Embedding
+6088	smartscreen.ex	C:\Windows\System32\smartscreen.exe -Embedding
+6136	SecurityHealth	Required memory at 0x98fa88f020 is not valid (process exited?)
+2856	VBoxTray.exe	"C:\Windows\System32\VBoxTray.exe" 
+2860	svchost.exe	C:\Windows\System32\svchost.exe -k NetworkService -p
+3416	OneDrive.exe	Required memory at 0x4826020 is not valid (process exited?)
+2712	RuntimeBroker.	C:\Windows\System32\RuntimeBroker.exe -Embedding
+1772	SgrmBroker.exe	Required memory at 0xa446fc7020 is inaccessible (swapped)
+4376	svchost.exe	C:\Windows\System32\svchost.exe -k netsvcs -p
+6120	svchost.exe	C:\Windows\System32\svchost.exe -k LocalServiceNetworkRestricted -p
+3836	OneDrive.exe	Required memory at 0x8c0020 is not valid (process exited?)
+4948	Taskmgr.exe	"C:\Windows\system32\taskmgr.exe" /4
+5868	SecurityHealth	C:\Windows\system32\SecurityHealthService.exe
+5088	LogonUI.exe	Required memory at 0xea5e27f020 is not valid (process exited?)
+5972	LockApp.exe	Required memory at 0x655f593206b8 is not valid (process exited?)
+4704	RuntimeBroker.	C:\Windows\System32\RuntimeBroker.exe -Embedding
+2776	MsMpEng.exe	"C:\ProgramData\Microsoft\Windows Defender\platform\4.18.23100.2009-0\MsMpEng.exe"
+2580	uhssvc.exe	Required memory at 0x20286e61bb8 is inaccessible (swapped)
+2996	svchost.exe	C:\Windows\System32\svchost.exe -k utcsvc -p
+1896	dllhost.exe	C:\Windows\system32\DllHost.exe /Processid:{973D20D7-562D-44B9-B70B-5A0F49CCDF3F}
+5872	OneDrive.exe	Required memory at 0x38cb0cb020 is not valid (process exited?)
+7072	taskhostw.exe	taskhostw.exe
+4036	OneDrive.exe	 /updateInstalled /background
+4664	GoogleCrashHan	Required memory at 0xafc020 is inaccessible (swapped)
+6108	GoogleCrashHan	Required memory at 0x1b49805020 is inaccessible (swapped)
+6932	chrome.exe	"C:\Program Files\Google\Chrome\Application\chrome.exe" --from-installer
+5344	chrome.exe	Required memory at 0x2705db81cc8 is inaccessible (swapped)
+3392	chrome.exe	Required memory at 0x26f0d041d48 is inaccessible (swapped)
+1212	chrome.exe	"C:\Program Files\Google\Chrome\Application\chrome.exe" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mojo-platform-channel-handle=2516 --field-trial-handle=2344,i,6759224881288811894,10343003098910843368,262144 /prefetch:8
+6792	chrome.exe	Required memory at 0x1d2ba7d1df8 is inaccessible (swapped)
+7524	chrome.exe	Required memory at 0x1fc1d471df8 is inaccessible (swapped)
+5956	svchost.exe	Required memory at 0x7073147020 is inaccessible (swapped)
+392	backgroundTask	Required memory at 0x4c627f9020 is not valid (process exited?)
+628	SystemSettings	Required memory at 0xc9a881d020 is inaccessible (swapped)
+5688	SecHealthUI.ex	Required memory at 0xf62dc86020 is inaccessible (swapped)
+2552	dllhost.exe	Required memory at 0xa4f4a74020 is inaccessible (swapped)
+2216	chrome.exe	Required memory at 0x1b73c521428 is inaccessible (swapped)
+2296	svchost.exe	Required memory at 0x567ca37020 is inaccessible (swapped)
+2588	WindowsInterna	Required memory at 0x3f9a676020 is inaccessible (swapped)
+7384	RuntimeBroker.	Required memory at 0xdf9156020 is inaccessible (swapped)
+2576	MicrosoftEdge.	Required memory at 0xc55486e020 is not valid (process exited?)
+4032	cmd.exe	"C:\Windows\system32\cmd.exe" 
+4712	conhost.exe	\??\C:\Windows\system32\conhost.exe 0x4
+5308	WmiPrvSE.exe	Required memory at 0x27ca1d21bb8 is inaccessible (swapped)
+2164	chrome.exe	"C:\Program Files\Google\Chrome\Application\chrome.exe" --type=renderer --disable-nacl --disable-gpu-compositing --lang=en-US --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=168 --time-ticks-at-unix-epoch=-1699338091665539 --launch-time-ticks=44430594680 --mojo-platform-channel-handle=7404 --field-trial-handle=2344,i,6759224881288811894,10343003098910843368,262144 /prefetch:1
+616	chrome.exe	"C:\Program Files\Google\Chrome\Application\chrome.exe" --type=utility --utility-sub-type=data_decoder.mojom.DataDecoderService --lang=en-US --service-sandbox-type=service --mojo-platform-channel-handle=4108 --field-trial-handle=2344,i,6759224881288811894,10343003098910843368,262144 /prefetch:8
+2648	chrome.exe	Required memory at 0xebdeade020 is not valid (process exited?)
+3496	chrome.exe	Required memory at 0x2bc63a41428 is inaccessible (swapped)
+1736	chrome.exe	Required memory at 0x1fe25ad1428 is inaccessible (swapped)
+6764	chrome.exe	Required memory at 0x294c8c51428 is inaccessible (swapped)
+7648	SearchProtocol	"C:\Windows\system32\SearchProtocolHost.exe" Global\UsGthrFltPipeMssGthrPipe16_ Global\UsGthrCtrlFltPipeMssGthrPipe16 1 -2147483646 "Software\Microsoft\Windows Search" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)" "C:\ProgramData\Microsoft\Search\Data\Temp\usgthrsvc" "DownLevelDaemon" 
+6336	SearchFilterHo	"C:\Windows\system32\SearchFilterHost.exe" 0 768 772 780 8192 776 
+7688	chrome.exe	"C:\Program Files\Google\Chrome\Application\chrome.exe" --type=renderer --disable-nacl --disable-gpu-compositing --lang=en-US --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=143 --time-ticks-at-unix-epoch=-1699338091665539 --launch-time-ticks=44537624915 --mojo-platform-channel-handle=7628 --field-trial-handle=2344,i,6759224881288811894,10343003098910843368,262144 /prefetch:1
+2596	chrome.exe	Required memory at 0x1e431d11428 is inaccessible (swapped)
+2688	chrome.exe	"C:\Program Files\Google\Chrome\Application\chrome.exe" --type=renderer --disable-nacl --disable-gpu-compositing --lang=en-US --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=182 --time-ticks-at-unix-epoch=-1699338091665539 --launch-time-ticks=44557566636 --mojo-platform-channel-handle=4852 --field-trial-handle=2344,i,6759224881288811894,10343003098910843368,262144 /prefetch:1
+7068	mimikatz.exe	mimikatz.exe
+2508	MicrosoftEdge.	Required memory at 0x7a5148d020 is inaccessible (swapped)
+5600	browser_broker	C:\Windows\system32\browser_broker.exe -Embedding
+3080	Windows.WARP.J	C:\Windows\system32\Windows.WARP.JITService.exe b4cb3e75-4cf7-4783-a90a-fedd562147d6 S-1-15-2-3624051433-2125758914-1423191267-1740899205-1073925389-3782572162-737981194 S-1-5-21-3461203602-4096304019-2269080069-1000 468
+2308	MicrosoftEdgeS	Required memory at 0x1527e8c020 is inaccessible (swapped)
+2324	MicrosoftEdgeC	Required memory at 0xc0b31cd020 is inaccessible (swapped)
+6904	Windows.WARP.J	C:\Windows\system32\Windows.WARP.JITService.exe b4cb3e76-4cf7-4783-a90a-fedd562147d6 S-1-15-2-3624051433-2125758914-1423191267-1740899205-1073925389-3782572162-737981194-3513710562-3729412521-1863153555-1462103995 S-1-5-21-3461203602-4096304019-2269080069-1000 468
+6772	DumpIt.exe	"C:\Users\IEUser\Downloads\DumpIT-20231107T175754Z-001\DumpIT\DumpIt.exe" 
+5940	conhost.exe	\??\C:\Windows\system32\conhost.exe 0x4
+4620	dllhost.exe	Required memory at 0x666cf7e020 is not valid (process exited?)
