@@ -33,7 +33,7 @@ def show_welcome_window():
         welcome_root.after(500, animate_dots, step + 1)
 
     welcome_root = tk.Tk()
-    welcome_root.title("Tsukyomi Program")
+    welcome_root.title("Tsukuyomi Program")
     welcome_root.geometry("800x600")  # Set the window size to match the main window
 
     # Create a canvas to layer the background image and the text
@@ -60,7 +60,7 @@ def show_welcome_window():
         # Create an image with text using the custom font
         text_image = Image.new("RGBA", (800, 600), (255, 255, 255, 0))
         draw = ImageDraw.Draw(text_image)
-        draw.text((300, 250), "TSUKYOMI", font=naruto_font, fill="white")
+        draw.text((300, 250), "TSUKUYOMI", font=naruto_font, fill="white")
         arial_font = os.path.join('font', 'arial.ttf')
         draw.text((300, 320), "Forensics & Analysis", font=ImageFont.truetype(arial_font, 24), fill="white")
         text_photo = ImageTk.PhotoImage(text_image)

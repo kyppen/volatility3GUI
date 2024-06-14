@@ -1,4 +1,4 @@
-# **Tsukyomi**. A Volatility 3 GUI by Cassiopeia
+# **Tsukuyomi**. A Volatility 3 GUI by Cassiopeia
 <br/>
 <br/>
 volatility3 stable: https://github.com/volatilityfoundation/volatility3/tree/stable
@@ -7,7 +7,7 @@ volatility3 stable: https://github.com/volatilityfoundation/volatility3/tree/sta
 
 ## Description
 <br/>
-Tsukiyomi is a python program that uses Tkinter to give Volatility3 a graphical user interface. <br/>
+Tsukuyomi is a python program that uses Tkinter to give Volatility3 a graphical user interface. <br/>
 The intent of the GUI is to make the work of an experienced user faster, while also lowering the <br/>
 necessary skill level required to operate Volatility3.
 <br/>
