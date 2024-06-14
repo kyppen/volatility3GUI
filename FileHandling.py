@@ -27,10 +27,7 @@ def getFileNameFromCommand(selected_entry):
 
     filename = filename + "." + wordList[count]
     return filename
-def AppendCommandToHistory(current_command):
-    commandFile = open(f"commandFile.txt", "a+")
-    commandFile.write(current_command.to_string() + "\n")
-    commandFile.close()
+
 
 
 def AppendCommandAndOutput(command_list, output):
